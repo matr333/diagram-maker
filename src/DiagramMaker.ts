@@ -109,7 +109,7 @@ export default class DiagramMaker<NodeType = {}, EdgeType = {}> {
     }
     const container = document.getElementById(domHandle);
     if (!container) {
-      throw new Error('Container not found');
+      throw new Error('Error! Container not found!');
     }
     return container;
   };
