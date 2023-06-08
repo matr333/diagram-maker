@@ -108,7 +108,7 @@ describe('nodeActionDispatcher', () => {
   describe('handleNodeDragEnd', () => {
     it('dispatches a node drag end action when id is present', () => {
       const nodeId = 'node1';
-      handleNodeDragEnd(store, nodeId);
+      handleNodeDragEnd(store, nodeId, {x: 0, y: 0}, {height: 0, width: 0});
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: nodeId },
         type: NodeActionsType.NODE_DRAG_END,
@@ -117,7 +117,7 @@ describe('nodeActionDispatcher', () => {
 
     it('dispatches nothing when id is absent', () => {
       const nodeId = undefined;
-      handleNodeDragEnd(store, nodeId);
+      handleNodeDragEnd(store, nodeId, {x: 0, y: 0}, {height: 0, width: 0});
       expect(store.dispatch).not.toHaveBeenCalled();
     });
   });

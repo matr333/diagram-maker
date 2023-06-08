@@ -206,7 +206,7 @@ describe('nodeReducer', () => {
   describe('drag end node action', () => {
     it('unsets dragging for passed node id', () => {
       const state = getState();
-      const action: DragEndNodeAction = { type: NodeActionsType.NODE_DRAG_END, payload: { id: 'node-1' } };
+      const action: DragEndNodeAction = { type: NodeActionsType.NODE_DRAG_END, payload: { id: 'node-1' , position: {x: 0, y: 0}, size: {height: 0, width: 0}} };
       const expectedState = getState();
       set(expectedState, 'node-1.diagramMakerData.dragging', false);
       expect(nodeReducer(state, action)).toEqual(expectedState);
@@ -215,7 +215,7 @@ describe('nodeReducer', () => {
 
     it('returns old state when unknown node id is passed', () => {
       const state = getState();
-      const action: DragEndNodeAction = { type: NodeActionsType.NODE_DRAG_END, payload: { id: 'node-3' } };
+      const action: DragEndNodeAction = { type: NodeActionsType.NODE_DRAG_END, payload: { id: 'node-3', position: {x: 0, y: 0}, size: {height: 0, width: 0} } };
       expect(nodeReducer(state, action)).toEqual(state);
       checkReducerPurity(state);
     });
@@ -226,6 +226,7 @@ describe('nodeReducer', () => {
       const state = getState();
       const action: DragStartNodeAction = { type: NodeActionsType.NODE_DRAG_START, payload: { id: 'node-1' } };
       const expectedState = getState();
+      set(expectedState, 'node-1.diagramMakerData.startDragPosition', { x: 0, y: 0 });
       set(expectedState, 'node-1.diagramMakerData.dragging', true);
       expect(nodeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);

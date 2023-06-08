@@ -47,10 +47,14 @@ function createDragStartNodeAction(id: string): DragStartNodeAction {
   };
 }
 
-function createDragEndNodeAction(id: string): DragEndNodeAction {
+function createDragEndNodeAction(
+  id: string,
+  position: Position,
+  size: Size,
+): DragEndNodeAction {
   return {
     type: NodeActionsType.NODE_DRAG_END,
-    payload: { id },
+    payload: { id, position, size },
   };
 }
 
@@ -180,9 +184,11 @@ export function handleNodeDrag<NodeType, EdgeType>(
 export function handleNodeDragEnd<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   id: string | undefined,
+  position: Position,
+  size: Size,
 ) {
   if (id) {
-    const action = createDragEndNodeAction(id);
+    const action = createDragEndNodeAction(id, position, size);
     store.dispatch(action);
   }
 }

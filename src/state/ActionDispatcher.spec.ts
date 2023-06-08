@@ -587,7 +587,7 @@ describe('ActionDispatcher', () => {
 
       observer.publish(DRAG_END, event);
       expect(handleNodeDragEndSpy).toHaveBeenCalledTimes(1);
-      expect(handleNodeDragEndSpy).toHaveBeenCalledWith(store, id);
+      expect(handleNodeDragEndSpy).toHaveBeenCalledWith(store, id, undefined);
     });
 
     it('calls handleEdgeCreate if type is DiagramMakerComponents.NODE_CONNECTOR', () => {

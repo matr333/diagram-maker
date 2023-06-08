@@ -115,12 +115,29 @@ export interface DragEndNodeAction extends Action {
   payload: {
     /** ID of the node to end dragging for */
     id: string;
+
+    position: Position;
+    size: Size;
   };
 }
+
 
 /** Action fired to update the position for the node */
 export interface DragNodeAction extends Action {
   type: NodeActionsType.NODE_DRAG;
+  payload: {
+    /** ID of the node to update size for */
+    id: string;
+    /** Updated size for the node */
+    position: Position;
+    workspaceRectangle: Rectangle;
+    size: Size;
+  };
+}
+
+/** Action fired to update the size for the node */
+export interface ResizeNodeAction extends Action {
+  type: NodeActionsType.NODE_RESIZE;
   payload: {
     /** ID of the node to update position for */
     id: string;

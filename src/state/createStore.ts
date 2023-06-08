@@ -22,7 +22,7 @@ export default function createStore<NodeType, EdgeType>(
 ): Store<DiagramMakerData<NodeType, EdgeType>> {
   const interceptorMiddleware = applyMiddleware(createInterceptorMiddleware(actionInterceptor));
   const undoMiddleware = applyMiddleware(getUndoMiddleware());
-  const middleware = compose(interceptorMiddleware, undoMiddleware);
+  const middleware = compose(undoMiddleware, interceptorMiddleware);
   const composedEnhancer = consumerEnhancer
     ? compose(middleware, consumerEnhancer)
     : middleware;

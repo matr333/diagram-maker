@@ -416,7 +416,7 @@ describe('DiagramMaker.API', () => {
       getAllEdges().should('have.length', 1);
     });
 
-    it('doesnt undo the last move node action', () => {
+    it('undoes undo the last move node action', () => {
       const centerX = 500;
       const centerY = 500;
       const topLeftX = centerX - nodeRect.width / 2;
@@ -427,7 +427,7 @@ describe('DiagramMaker.API', () => {
       dragAndDropElement(getNodeById('node1'), { pageX: centerX, pageY: centerY });
       getNodeById('node1').should('have.css', 'transform').and('eq', expectedTransform);
       getElementByDataIdAndType(undoId, toolsType).click();
-      getNodeById('node1').should('have.css', 'transform').and('eq', expectedTransform);
+      getNodeById('node1').should('have.css', 'transform').and('eq', expectedBeforeTransform);
     });
 
     it('doesnt undo the last workspace move action', () => {
