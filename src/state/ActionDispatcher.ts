@@ -317,7 +317,9 @@ export default class ActionDispatcher<NodeType, EdgeType> {
         }
         break;
       case DiagramMakerComponentsType.NODE:
-        handleNodeDragEnd(this.store, id);
+        if (id) {
+          handleNodeDragEnd(this.store, id, this.store.getState()?.nodes?.[id]?.diagramMakerData?.position, this.store.getState()?.nodes?.[id]?.diagramMakerData?.size);
+        }
         break;
       case (DiagramMakerComponentsType.NODE_CONNECTOR):
         handleEdgeDragEnd(this.store, id);

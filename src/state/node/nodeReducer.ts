@@ -4,9 +4,7 @@ import { DiagramMakerAction } from 'diagramMaker/state/actions';
 import { EdgeActionsType } from 'diagramMaker/state/edge';
 import { EditorActionsType } from 'diagramMaker/state/editor/editorActions';
 import { GlobalActionsType } from 'diagramMaker/state/global/globalActions';
-import {
-  DiagramMakerNode, DiagramMakerNodes, Position, Size,
-} from 'diagramMaker/state/types';
+import { DiagramMakerNode, DiagramMakerNodes, Position, Size, } from 'diagramMaker/state/types';
 import { WorkspaceActionsType } from 'diagramMaker/state/workspace';
 
 import { NodeActionsType } from './nodeActions';
@@ -78,6 +76,7 @@ export default function nodeReducer<NodeType, EdgeType>(
         const currentNode = draftState[action.payload.id];
         if (currentNode) {
           currentNode.diagramMakerData.dragging = true;
+          currentNode.diagramMakerData.startDragPosition = currentNode.diagramMakerData.position;
         }
       });
     case NodeActionsType.NODE_DRAG:
@@ -120,6 +119,9 @@ export default function nodeReducer<NodeType, EdgeType>(
         const currentNode = draftState[action.payload.id];
         if (currentNode) {
           currentNode.diagramMakerData.dragging = false;
+          if (action.payload.position) {
+            currentNode.diagramMakerData.position = action.payload.position;
+          }
         }
       });
     case EditorActionsType.UPDATE_SELECTION_MARQUEE:

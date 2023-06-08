@@ -125,6 +125,10 @@ export interface DiagramMakerNode<NodeType> {
      * Denotes whether the node is currently being dragged.
      */
     readonly dragging?: boolean;
+    /**
+     * Initial position for the latest Drag Start action
+     */
+    readonly startDragPosition?: Position;
   };
   /** Contains data managed by the consumer */
   readonly consumerData?: NodeType;

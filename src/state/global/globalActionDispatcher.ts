@@ -1,7 +1,11 @@
 import { Store } from 'redux';
 
-import { DiagramMakerData, DiagramMakerEdge, DiagramMakerNode } from 'diagramMaker/state/types';
-
+import {
+  DiagramMakerData,
+  DiagramMakerEdge,
+  DiagramMakerNode,
+} from 'diagramMaker/state/types';
+import { CreateNodeAction, DragNodeAction, NodeActionsType } from 'diagramMaker/state';
 import { CreateItemsAction, DeleteItemsAction, GlobalActionsType } from './globalActions';
 
 export function createDeleteItemsAction(
@@ -30,6 +34,21 @@ export function createNewItemsAction<NodeType, EdgeType>(
   };
 }
 
+export function createNewNodeAction<NodeType>(
+  node: DiagramMakerNode<NodeType>,
+): CreateNodeAction<NodeType> {
+  return {
+    type: NodeActionsType.NODE_CREATE,
+    payload: {
+      id: node.id,
+      typeId: node.typeId || '',
+      position: node.diagramMakerData.position,
+      size: node.diagramMakerData.size,
+      consumerData: node.consumerData,
+    },
+  };
+}
+
 export function handleDeleteSelectedItems<NodeType, EdgeType>(store: Store<DiagramMakerData<NodeType, EdgeType>>) {
   const { edges, nodes } = store.getState();
   const nodeIds: string[] = Object.keys(nodes).filter((id) => nodes[id].diagramMakerData.selected);
@@ -44,4 +63,24 @@ export function handleDeleteSelectedItems<NodeType, EdgeType>(store: Store<Diagr
   const action = createDeleteItemsAction(nodeIds, edgeIds);
 
   store.dispatch(action);
+}
+
+export function handleMoveNodeAction<NodeType, EdgeType>(
+  node: DiagramMakerNode<NodeType>,
+  state: DiagramMakerData<NodeType, EdgeType>,
+): DragNodeAction {
+  const { canvasSize } = state.workspace;
+  const workspaceRectangle = {
+    position: { x: 0, y: 0 },
+    size: canvasSize,
+  };
+  return {
+    type: NodeActionsType.NODE_DRAG,
+    payload: {
+      id: node.id,
+      position: node.diagramMakerData.startDragPosition || node.diagramMakerData.position,
+      size: node.diagramMakerData.size,
+      workspaceRectangle,
+    },
+  };
 }
