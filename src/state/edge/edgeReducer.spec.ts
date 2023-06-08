@@ -7,7 +7,7 @@ import { DiagramMakerEdge, DiagramMakerEdges } from 'diagramMaker/state/types';
 import { DeselectAction, WorkspaceActionsType } from 'diagramMaker/state/workspace';
 
 import {
-  CreateEdgeAction, DeleteEdgeAction, EdgeActionsType, SelectEdgeAction,
+  CreateEdgeAction, DeleteEdgeAction, DeselectEdgeAction, EdgeActionsType, SelectEdgeAction,
 } from './edgeActions';
 import edgeReducer from './edgeReducer';
 
@@ -76,22 +76,22 @@ describe('edgeReducer', () => {
   });
 
   describe('select edge action', () => {
-    it('sets selection for selected edge & false everywhere else', () => {
+    it('sets selection for selected edge', () => {
       const state = getState();
       const action: SelectEdgeAction = { type: EdgeActionsType.EDGE_SELECT, payload: { id: 'edge-1' } };
       const expectedState = getState();
       set(expectedState, 'edge-1.diagramMakerData.selected', true);
-      set(expectedState, 'edge-2.diagramMakerData.selected', false);
       expect(edgeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
     });
+  });
 
-    it('set selection to false everywhere when unknown edge is deleted', () => {
+  describe('deselect edge action', () => {
+    it('sets selection for deselected edge', () => {
       const state = getState();
+      const action: DeselectEdgeAction = { type: EdgeActionsType.EDGE_DESELECT, payload: { id: 'edge-1' } };
       const expectedState = getState();
       set(expectedState, 'edge-1.diagramMakerData.selected', false);
-      set(expectedState, 'edge-2.diagramMakerData.selected', false);
-      const action: SelectEdgeAction = { type: EdgeActionsType.EDGE_SELECT, payload: { id: 'edge-3' } };
       expect(edgeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
     });
@@ -145,18 +145,6 @@ describe('edgeReducer', () => {
       set(expectedState, 'edge-1.diagramMakerData.selected', false);
       set(expectedState, 'edge-2.diagramMakerData.selected', false);
       const action: DeselectAction = { type: WorkspaceActionsType.WORKSPACE_DESELECT };
-      expect(edgeReducer(state, action)).toEqual(expectedState);
-      checkReducerPurity(state);
-    });
-  });
-
-  describe('node select action', () => {
-    it('sets selected for all edges to false', () => {
-      const state = getState();
-      const expectedState = getState();
-      set(expectedState, 'edge-1.diagramMakerData.selected', false);
-      set(expectedState, 'edge-2.diagramMakerData.selected', false);
-      const action: SelectNodeAction = { type: NodeActionsType.NODE_SELECT, payload: { id: 'node-1' } };
       expect(edgeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
     });

@@ -20,7 +20,14 @@ import * as GlobalActionHandlers from 'diagramMaker/state/global/globalActionDis
 import * as NodeActionHandlers from 'diagramMaker/state/node/nodeActionDispatcher';
 import * as PanelActionHandlers from 'diagramMaker/state/panel/panelActionDispatcher';
 import {
-  DiagramMakerContextMenu, DiagramMakerEditor, DiagramMakerWorkspace, EditorMode, EditorModeType, Position, Size,
+  DiagramMakerContextMenu, DiagramMakerEdge, DiagramMakerEdges,
+  DiagramMakerEditor, DiagramMakerNode,
+  DiagramMakerNodes,
+  DiagramMakerWorkspace,
+  EditorMode,
+  EditorModeType,
+  Position,
+  Size,
 } from 'diagramMaker/state/types';
 import * as WorkspaceActionHandlers from 'diagramMaker/state/workspace/workspaceActionDispatcher';
 import { asMock } from 'diagramMaker/testing/testUtils';
@@ -34,7 +41,9 @@ jest.mock('diagramMaker/service/ui/UITargetNormalizer', () => ({ default: { getT
 interface MockStore {
   getState: () => {
     editor: DiagramMakerEditor,
-    workspace: DiagramMakerWorkspace
+    workspace: DiagramMakerWorkspace,
+    nodes: Record<string, DiagramMakerNode<any>>,
+    edges: Record<string, DiagramMakerEdge<any>>,
   };
 }
 
@@ -54,10 +63,10 @@ let observer: Observer;
 let store: MockStore;
 let config: ConfigService<{}, {}>;
 
-const getMockStore = (workspace: DiagramMakerWorkspace, editor: DiagramMakerEditor) => ({
+const getMockStore = (workspace: DiagramMakerWorkspace, editor: DiagramMakerEditor, nodes = {}, edges = {}) => ({
   dispatch: jest.fn(),
   getState: () => ({
-    workspace, editor, nodes: {}, edges: {},
+    workspace, editor, nodes, edges,
   }),
 });
 
@@ -116,10 +125,12 @@ describe('ActionDispatcher', () => {
         id,
         type: NODE,
       };
+      const originalEvent = { ctrlKey: false };
+      store.getState().nodes[id] = { diagramMakerData: { selected: false } } as DiagramMakerNode<any>;
 
-      observer.publish(LEFT_CLICK, { target });
+      observer.publish(LEFT_CLICK, { target, originalEvent });
       expect(handleNodeClickSpy).toHaveBeenCalledTimes(1);
-      expect(handleNodeClickSpy).toHaveBeenCalledWith(store, id);
+      expect(handleNodeClickSpy).toHaveBeenCalledWith(store, id, false);
     });
 
     it('calls handleEdgeClick if type is DiagramMakerComponents.EDGE', () => {
@@ -131,10 +142,12 @@ describe('ActionDispatcher', () => {
         id,
         type: EDGE,
       };
+      const originalEvent = { ctrlKey: false };
+      store.getState().edges[id] = { diagramMakerData: { selected: false } } as DiagramMakerEdge<any>;
 
-      observer.publish(LEFT_CLICK, { target });
+      observer.publish(LEFT_CLICK, { target, originalEvent });
       expect(handleEdgeClickSpy).toHaveBeenCalledTimes(1);
-      expect(handleEdgeClickSpy).toHaveBeenCalledWith(store, id);
+      expect(handleEdgeClickSpy).toHaveBeenCalledWith(store, id, false);
     });
 
     it('calls handleEdgeClick if type is DiagramMakerComponents.EDGE_BADGE', () => {
@@ -146,10 +159,12 @@ describe('ActionDispatcher', () => {
         id,
         type: EDGE_BADGE,
       };
+      const originalEvent = { ctrlKey: false };
+      store.getState().edges[id] = { diagramMakerData: { selected: false } } as DiagramMakerEdge<any>;
 
-      observer.publish(LEFT_CLICK, { target });
+      observer.publish(LEFT_CLICK, { target, originalEvent });
       expect(handleEdgeClickSpy).toHaveBeenCalledTimes(1);
-      expect(handleEdgeClickSpy).toHaveBeenCalledWith(store, id);
+      expect(handleEdgeClickSpy).toHaveBeenCalledWith(store, id, false);
     });
 
     it('calls handleWorkspaceClick if type is DiagramMakerComponents.WORKSPACE', () => {
@@ -587,7 +602,7 @@ describe('ActionDispatcher', () => {
 
       observer.publish(DRAG_END, event);
       expect(handleNodeDragEndSpy).toHaveBeenCalledTimes(1);
-      expect(handleNodeDragEndSpy).toHaveBeenCalledWith(store, id, undefined);
+      expect(handleNodeDragEndSpy).toHaveBeenCalledWith(store, id, undefined, undefined);
     });
 
     it('calls handleEdgeCreate if type is DiagramMakerComponents.NODE_CONNECTOR', () => {

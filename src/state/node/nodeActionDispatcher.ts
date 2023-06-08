@@ -98,7 +98,7 @@ function createPotentialNodeDragEndAction(): DragEndPotentialNodeAction {
 
 function createDeselectAction(): DeselectAction {
   return {
-    type: WorkspaceActionsType.WORKSPACE_DESELECT,
+      type: WorkspaceActionsType.WORKSPACE_DESELECT,
   };
 }
 

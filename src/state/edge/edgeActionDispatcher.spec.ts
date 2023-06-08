@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
 import { asMock } from 'diagramMaker/testing/testUtils';
-
+import { WorkspaceActionsType } from 'diagramMaker/state';
 import {
   handleEdgeClick,
   handleEdgeCreate,
@@ -16,13 +16,13 @@ import { EdgeActionsType } from './edgeActions';
 jest.mock('uuid', () => ({ v4: jest.fn() }));
 
 describe('edgeActionDispatcher', () => {
-  const store: any = {
-    dispatch: jest.fn(),
-    getState: jest.fn(),
-  };
+  let store: any;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    store = {
+      dispatch: jest.fn(),
+      getState: jest.fn(),
+    };
   });
 
   function mockState(mockedState: any) {
@@ -30,8 +30,38 @@ describe('edgeActionDispatcher', () => {
   }
 
   describe('handleEdgeClick', () => {
+    const edgeId = 'edge1';
+    const selectedEdgeId = 'edge2';
+
+    beforeEach(() => {
+      mockState({
+        edges: {
+          [edgeId]: { diagramMakerData: { selected: false } },
+          [selectedEdgeId]: { diagramMakerData: { selected: true } },
+        },
+      });
+    });
+
+    it('dispatches nothing when id is absent', () => {
+      handleEdgeClick(store, undefined, false);
+      expect(store.dispatch).not.toHaveBeenCalled();
+    });
+
+    it('dispatches a workspace deselect action when id is present and ctrl is not pressed', () => {
+      handleEdgeClick(store, edgeId, false);
+      expect(store.dispatch).toHaveBeenCalledWith({
+        type: WorkspaceActionsType.WORKSPACE_DESELECT,
+      });
+    });
+
+    it('skips workspace deselect action when ctrl is pressed', () => {
+      handleEdgeClick(store, edgeId, true);
+      expect(store.dispatch).not.toHaveBeenCalledWith({
+        type: WorkspaceActionsType.WORKSPACE_DESELECT,
+      });
+    });
+
     it('dispatches an edge select action when id is present', () => {
-      const edgeId = 'edge1';
       handleEdgeClick(store, edgeId, false);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: edgeId },
@@ -39,10 +69,28 @@ describe('edgeActionDispatcher', () => {
       });
     });
 
-    it('dispatches nothing when id is absent', () => {
-      const edgeId = undefined;
-      handleEdgeClick(store, edgeId, false);
-      expect(store.dispatch).not.toHaveBeenCalled();
+    it('dispatches an edge select action ctrl is not pressed and edge is selected', () => {
+      handleEdgeClick(store, selectedEdgeId, false);
+      expect(store.dispatch).toHaveBeenCalledWith({
+        payload: { id: selectedEdgeId },
+        type: EdgeActionsType.EDGE_SELECT,
+      });
+    });
+
+    it('skips edge select action when ctrl is pressed and edge is selected', () => {
+      handleEdgeClick(store, selectedEdgeId, true);
+      expect(store.dispatch).not.toHaveBeenCalledWith({
+        payload: { id: selectedEdgeId },
+        type: EdgeActionsType.EDGE_SELECT,
+      });
+    });
+
+    it('dispatches node deselect action when ctrl is pressed and edge is selected', () => {
+      handleEdgeClick(store, selectedEdgeId, true);
+      expect(store.dispatch).toHaveBeenCalledWith({
+        payload: { id: selectedEdgeId },
+        type: EdgeActionsType.EDGE_DESELECT,
+      });
     });
   });
 

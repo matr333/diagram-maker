@@ -7,6 +7,7 @@ import {
   handleNodeDragStart, handlePotentialNodeDrag, handlePotentialNodeDragEnd, handlePotentialNodeDragStart,
 } from './nodeActionDispatcher';
 import { NodeActionsType } from './nodeActions';
+import { WorkspaceActionsType } from 'diagramMaker/state';
 
 jest.mock('uuid', () => ({ v4: jest.fn() }));
 jest.mock('lodash', () => ({
@@ -22,6 +23,13 @@ describe('nodeActionDispatcher', () => {
         node1: {
           diagramMakerData: {
             size: { width: 0, height: 0 },
+            selected: false,
+          },
+        },
+        node2: {
+          diagramMakerData: {
+            size: { width: 0, height: 0 },
+            selected: true,
           },
         },
       },
@@ -72,7 +80,21 @@ describe('nodeActionDispatcher', () => {
   });
 
   describe('handleNodeClick', () => {
-    it('dispatches a node select action when id is present', () => {
+    it('dispatches nothing when id is absent', () => {
+      const nodeId = undefined;
+      handleNodeClick(store, nodeId, false);
+      expect(store.dispatch).not.toHaveBeenCalled();
+    });
+
+    it('dispatches a workspace deselect action when id is present and ctrl is not pressed', () => {
+      const nodeId = 'node1';
+      handleNodeClick(store, nodeId, false);
+      expect(store.dispatch).toHaveBeenCalledWith({
+        type: WorkspaceActionsType.WORKSPACE_DESELECT,
+      });
+    });
+
+    it('dispatches a node select action when node is not selected', () => {
       const nodeId = 'node1';
       handleNodeClick(store, nodeId, false);
       expect(store.dispatch).toHaveBeenCalledWith({
@@ -81,10 +103,30 @@ describe('nodeActionDispatcher', () => {
       });
     });
 
-    it('dispatches nothing when id is absent', () => {
-      const nodeId = undefined;
-      handleNodeClick(store, nodeId, false);
-      expect(store.dispatch).not.toHaveBeenCalled();
+    it('skips workspace deselect action when ctrl is pressed', () => {
+      const nodeId = 'node1';
+      handleNodeClick(store, nodeId, true);
+      expect(store.dispatch).not.toHaveBeenCalledWith({
+        type: WorkspaceActionsType.WORKSPACE_DESELECT,
+      });
+    });
+
+    it('skips node select action when ctrl is pressed and node is selected', () => {
+      const nodeId = 'node2';
+      handleNodeClick(store, nodeId, true);
+      expect(store.dispatch).not.toHaveBeenCalledWith({
+        payload: { id: nodeId },
+        type: NodeActionsType.NODE_SELECT,
+      });
+    });
+
+    it('dispatches node deselect action when ctrl is pressed and node is selected', () => {
+      const nodeId = 'node2';
+      handleNodeClick(store, nodeId, true);
+      expect(store.dispatch).toHaveBeenCalledWith({
+        payload: { id: nodeId },
+        type: NodeActionsType.NODE_DESELECT,
+      });
     });
   });
 
@@ -116,7 +158,11 @@ describe('nodeActionDispatcher', () => {
         width: 0,
       });
       expect(store.dispatch).toHaveBeenCalledWith({
-        payload: { id: nodeId },
+        payload: {
+          id: nodeId,
+          position: { x: 0, y: 0 },
+          size: { height: 0, width: 0 },
+        },
         type: NodeActionsType.NODE_DRAG_END,
       });
     });

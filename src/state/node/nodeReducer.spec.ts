@@ -14,7 +14,7 @@ import { DeselectAction, WorkspaceActionsType } from 'diagramMaker/state/workspa
 import { SelectAllAction } from 'diagramMaker/state/workspace/workspaceActions';
 
 import {
-  CreateNodeAction, DeleteNodeAction, DragEndNodeAction, DragNodeAction,
+  CreateNodeAction, DeleteNodeAction, DeselectNodeAction, DragEndNodeAction, DragNodeAction,
   DragStartNodeAction, NodeActionsType, SelectNodeAction,
 } from './nodeActions';
 import nodeReducer from './nodeReducer';
@@ -142,22 +142,22 @@ describe('nodeReducer', () => {
   });
 
   describe('select node action', () => {
-    it('sets selection for selected node & false everywhere else', () => {
+    it('sets selection for selected node', () => {
       const state = getState();
       const action: SelectNodeAction = { type: NodeActionsType.NODE_SELECT, payload: { id: 'node-1' } };
       const expectedState = getState();
       set(expectedState, 'node-1.diagramMakerData.selected', true);
-      set(expectedState, 'node-2.diagramMakerData.selected', false);
       expect(nodeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
     });
+  });
 
-    it('set selection to false everywhere when unknown node is selected', () => {
+  describe('deselect node action', () => {
+    it('sets selection for deselected node', () => {
       const state = getState();
+      const action: DeselectNodeAction = { type: NodeActionsType.NODE_DESELECT, payload: { id: 'node-1' } };
       const expectedState = getState();
       set(expectedState, 'node-1.diagramMakerData.selected', false);
-      set(expectedState, 'node-2.diagramMakerData.selected', false);
-      const action: SelectNodeAction = { type: NodeActionsType.NODE_SELECT, payload: { id: 'node-3' } };
       expect(nodeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
     });
@@ -176,7 +176,7 @@ describe('nodeReducer', () => {
   });
 
   describe('focus node action', () => {
-    it('sets selection for selected node & false everywhere else', () => {
+    it('sets selection for selected node', () => {
       const state = getState();
       const action: FocusNodeAction = {
         type: EditorActionsType.FOCUS_NODE,
@@ -184,20 +184,6 @@ describe('nodeReducer', () => {
       };
       const expectedState = getState();
       set(expectedState, 'node-1.diagramMakerData.selected', true);
-      set(expectedState, 'node-2.diagramMakerData.selected', false);
-      expect(nodeReducer(state, action)).toEqual(expectedState);
-      checkReducerPurity(state);
-    });
-
-    it('set selection to false everywhere when unknown node is selected', () => {
-      const state = getState();
-      const expectedState = getState();
-      set(expectedState, 'node-1.diagramMakerData.selected', false);
-      set(expectedState, 'node-2.diagramMakerData.selected', false);
-      const action: FocusNodeAction = {
-        type: EditorActionsType.FOCUS_NODE,
-        payload: { id: 'node-3', position: { x: 10, y: 10 }, size: { width: 10, height: 10 } },
-      };
       expect(nodeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
     });
@@ -443,18 +429,6 @@ describe('nodeReducer', () => {
       set(expectedState, 'node-1.diagramMakerData.selected', false);
       set(expectedState, 'node-2.diagramMakerData.selected', false);
       const action: DeselectAction = { type: WorkspaceActionsType.WORKSPACE_DESELECT };
-      expect(nodeReducer(state, action)).toEqual(expectedState);
-      checkReducerPurity(state);
-    });
-  });
-
-  describe('edge select action', () => {
-    it('sets selected for all nodes to false', () => {
-      const state = getState();
-      const expectedState = getState();
-      set(expectedState, 'node-1.diagramMakerData.selected', false);
-      set(expectedState, 'node-2.diagramMakerData.selected', false);
-      const action: SelectEdgeAction = { type: EdgeActionsType.EDGE_SELECT, payload: { id: 'edge-1' } };
       expect(nodeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
     });
