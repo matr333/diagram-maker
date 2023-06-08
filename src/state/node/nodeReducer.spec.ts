@@ -1,21 +1,25 @@
 import merge from 'lodash-es/merge';
 import omit from 'lodash-es/omit';
 import set from 'lodash-es/set';
-
-import { EdgeActionsType, SelectEdgeAction } from 'diagramMaker/state/edge';
 import {
-  EditorActionsType, FocusNodeAction, UpdateSelectionMarqueeAction,
+  EditorActionsType,
+  FocusNodeAction,
+  UpdateSelectionMarqueeAction,
 } from 'diagramMaker/state/editor/editorActions';
 import { CreateItemsAction, DeleteItemsAction, GlobalActionsType } from 'diagramMaker/state/global/globalActions';
-import {
-  DiagramMakerNode, DiagramMakerNodes, Position,
-} from 'diagramMaker/state/types';
+import { DiagramMakerNode, DiagramMakerNodes, Position } from 'diagramMaker/state/types';
 import { DeselectAction, WorkspaceActionsType } from 'diagramMaker/state/workspace';
 import { SelectAllAction } from 'diagramMaker/state/workspace/workspaceActions';
 
 import {
-  CreateNodeAction, DeleteNodeAction, DeselectNodeAction, DragEndNodeAction, DragNodeAction,
-  DragStartNodeAction, NodeActionsType, SelectNodeAction,
+  CreateNodeAction,
+  DeleteNodeAction,
+  DeselectNodeAction,
+  DragEndNodeAction,
+  DragNodeAction,
+  DragStartNodeAction,
+  NodeActionsType,
+  SelectNodeAction,
 } from './nodeActions';
 import nodeReducer from './nodeReducer';
 

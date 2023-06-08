@@ -2,12 +2,15 @@ import omit from 'lodash-es/omit';
 import set from 'lodash-es/set';
 
 import { CreateItemsAction, DeleteItemsAction, GlobalActionsType } from 'diagramMaker/state/global/globalActions';
-import { NodeActionsType, SelectNodeAction } from 'diagramMaker/state/node';
 import { DiagramMakerEdge, DiagramMakerEdges } from 'diagramMaker/state/types';
 import { DeselectAction, WorkspaceActionsType } from 'diagramMaker/state/workspace';
 
 import {
-  CreateEdgeAction, DeleteEdgeAction, DeselectEdgeAction, EdgeActionsType, SelectEdgeAction,
+  CreateEdgeAction,
+  DeleteEdgeAction,
+  DeselectEdgeAction,
+  EdgeActionsType,
+  SelectEdgeAction,
 } from './edgeActions';
 import edgeReducer from './edgeReducer';
 

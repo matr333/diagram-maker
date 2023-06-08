@@ -2,12 +2,12 @@ import { v4 as uuid } from 'uuid';
 
 import { asMock } from 'diagramMaker/testing/testUtils';
 
+import { WorkspaceActionsType } from 'diagramMaker/state';
 import {
   handleNodeClick, handleNodeCreate, handleNodeDrag, handleNodeDragEnd,
   handleNodeDragStart, handlePotentialNodeDrag, handlePotentialNodeDragEnd, handlePotentialNodeDragStart,
 } from './nodeActionDispatcher';
 import { NodeActionsType } from './nodeActions';
-import { WorkspaceActionsType } from 'diagramMaker/state';
 
 jest.mock('uuid', () => ({ v4: jest.fn() }));
 jest.mock('lodash', () => ({

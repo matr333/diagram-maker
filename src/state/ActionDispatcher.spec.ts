@@ -20,9 +20,10 @@ import * as GlobalActionHandlers from 'diagramMaker/state/global/globalActionDis
 import * as NodeActionHandlers from 'diagramMaker/state/node/nodeActionDispatcher';
 import * as PanelActionHandlers from 'diagramMaker/state/panel/panelActionDispatcher';
 import {
-  DiagramMakerContextMenu, DiagramMakerEdge, DiagramMakerEdges,
-  DiagramMakerEditor, DiagramMakerNode,
-  DiagramMakerNodes,
+  DiagramMakerContextMenu,
+  DiagramMakerEdge,
+  DiagramMakerEditor,
+  DiagramMakerNode,
   DiagramMakerWorkspace,
   EditorMode,
   EditorModeType,
