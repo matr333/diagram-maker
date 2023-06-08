@@ -1,7 +1,6 @@
 import { Draft, produce } from 'immer';
 
 import { DiagramMakerAction } from 'diagramMaker/state/actions';
-import { EdgeActionsType } from 'diagramMaker/state/edge';
 import { EditorActionsType } from 'diagramMaker/state/editor/editorActions';
 import { GlobalActionsType } from 'diagramMaker/state/global/globalActions';
 import {
@@ -64,14 +63,11 @@ export default function nodeReducer<NodeType, EdgeType>(
     case EditorActionsType.FOCUS_NODE:
     case NodeActionsType.NODE_SELECT:
       return produce(state, (draftState) => {
-        const nodeIds = Object.keys(draftState);
-        nodeIds.forEach((nodeId) => {
-          if (nodeId !== action.payload.id) {
-            draftState[nodeId].diagramMakerData.selected = false;
-          } else {
-            draftState[nodeId].diagramMakerData.selected = true;
-          }
-        });
+        draftState[action.payload.id].diagramMakerData.selected = true;
+      });
+    case NodeActionsType.NODE_DESELECT:
+      return produce(state, (draftState) => {
+        draftState[action.payload.id].diagramMakerData.selected = false;
       });
     case NodeActionsType.NODE_DRAG_START:
       return produce(state, (draftState) => {
@@ -139,7 +135,6 @@ export default function nodeReducer<NodeType, EdgeType>(
         });
       });
     case WorkspaceActionsType.WORKSPACE_DESELECT:
-    case EdgeActionsType.EDGE_SELECT:
       return produce(state, (draftState) => {
         const nodeIds = Object.keys(draftState);
         nodeIds.forEach((nodeId) => {

@@ -32,7 +32,7 @@ describe('edgeActionDispatcher', () => {
   describe('handleEdgeClick', () => {
     it('dispatches an edge select action when id is present', () => {
       const edgeId = 'edge1';
-      handleEdgeClick(store, edgeId);
+      handleEdgeClick(store, edgeId, false);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: edgeId },
         type: EdgeActionsType.EDGE_SELECT,
@@ -41,7 +41,7 @@ describe('edgeActionDispatcher', () => {
 
     it('dispatches nothing when id is absent', () => {
       const edgeId = undefined;
-      handleEdgeClick(store, edgeId);
+      handleEdgeClick(store, edgeId, false);
       expect(store.dispatch).not.toHaveBeenCalled();
     });
   });

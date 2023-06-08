@@ -9,6 +9,7 @@ export enum EdgeActionsType {
   EDGE_DELETE = 'EDGE_DELETE',
   /** Edge selection */
   EDGE_SELECT = 'EDGE_SELECT',
+  EDGE_DESELECT = 'EDGE_DESELECT',
   /** Potential Edge drag start */
   EDGE_DRAG_START = 'EDGE_DRAG_START',
   /** Potential Edge drag */
@@ -28,6 +29,14 @@ export const EdgeActions = {
 /** Action fired to select an edge */
 export interface SelectEdgeAction extends Action {
   type: EdgeActionsType.EDGE_SELECT;
+  payload: {
+    /** ID of the edge that needs to be selected */
+    id: string;
+  };
+}
+/** Action fired to deselect an edge */
+export interface DeselectEdgeAction extends Action {
+  type: EdgeActionsType.EDGE_DESELECT;
   payload: {
     /** ID of the edge that needs to be selected */
     id: string;
@@ -114,4 +123,4 @@ export interface MouseOutAction extends Action {
 }
 
 export type EdgeAction<EdgeType> = CreateEdgeAction<EdgeType> | SelectEdgeAction | DeleteEdgeAction |
-DragStartEdgeAction | DragEndEdgeAction | DragEdgeAction | MouseOverAction | MouseOutAction;
+DragStartEdgeAction | DragEndEdgeAction | DragEdgeAction | MouseOverAction | MouseOutAction | DeselectEdgeAction;

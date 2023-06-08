@@ -3,8 +3,9 @@ import { v4 as uuid } from 'uuid';
 
 import { DiagramMakerData, Position } from 'diagramMaker/state/types';
 
+import { DeselectAction, WorkspaceActionsType } from 'diagramMaker/state';
 import {
-  CreateEdgeAction,
+  CreateEdgeAction, DeselectEdgeAction,
   DragEdgeAction,
   DragEndEdgeAction,
   DragStartEdgeAction,
@@ -59,6 +60,12 @@ function createSelectEdgeAction(id: string): SelectEdgeAction {
     payload: { id },
   };
 }
+function createDeselectEdgeAction(id: string): DeselectEdgeAction {
+  return {
+    type: EdgeActionsType.EDGE_DESELECT,
+    payload: { id },
+  };
+}
 
 function createMouseOverEdgeAction(id: string): MouseOverAction {
   return {
@@ -71,6 +78,12 @@ function createMouseOutEdgeAction(id: string): MouseOutAction {
   return {
     type: EdgeActionsType.EDGE_MOUSE_OUT,
     payload: { id },
+  };
+}
+
+function createDeselectAction(): DeselectAction {
+  return {
+    type: WorkspaceActionsType.WORKSPACE_DESELECT,
   };
 }
 
@@ -129,8 +142,21 @@ export function handleEdgeCreate<NodeType, EdgeType>(
 export function handleEdgeClick<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   id: string | undefined,
+  withCtrl: boolean,
 ) {
-  if (id) {
+  if (!id) {
+    return;
+  }
+
+  if (!withCtrl) {
+    store.dispatch(createDeselectAction());
+  }
+
+  const edgeSelected = store.getState().edges[id].diagramMakerData.selected;
+
+  if (withCtrl && edgeSelected) {
+    store.dispatch(createDeselectEdgeAction(id));
+  } else {
     store.dispatch(createSelectEdgeAction(id));
   }
 }

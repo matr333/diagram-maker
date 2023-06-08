@@ -74,7 +74,7 @@ describe('nodeActionDispatcher', () => {
   describe('handleNodeClick', () => {
     it('dispatches a node select action when id is present', () => {
       const nodeId = 'node1';
-      handleNodeClick(store, nodeId);
+      handleNodeClick(store, nodeId, false);
       expect(store.dispatch).toHaveBeenCalledWith({
         payload: { id: nodeId },
         type: NodeActionsType.NODE_SELECT,
@@ -83,7 +83,7 @@ describe('nodeActionDispatcher', () => {
 
     it('dispatches nothing when id is absent', () => {
       const nodeId = undefined;
-      handleNodeClick(store, nodeId);
+      handleNodeClick(store, nodeId, false);
       expect(store.dispatch).not.toHaveBeenCalled();
     });
   });

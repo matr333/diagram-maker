@@ -6,6 +6,7 @@ export enum NodeActionsType {
   NODE_CREATE = 'NODE_CREATE',
   NODE_DELETE = 'NODE_DELETE',
   NODE_SELECT = 'NODE_SELECT',
+  NODE_DESELECT = 'NODE_DESELECT',
   NODE_DRAG_START = 'NODE_DRAG_START',
   NODE_DRAG_END = 'NODE_DRAG_END',
   NODE_DRAG = 'NODE_DRAG',
@@ -77,6 +78,14 @@ export interface SelectNodeAction extends Action {
     id: string;
   };
 }
+/** Action fired to deselect a node */
+export interface DeselectNodeAction extends Action {
+  type: NodeActionsType.NODE_DESELECT;
+  payload: {
+    /** ID of the node to select */
+    id: string;
+  };
+}
 
 /**
  * Action fired to delete a node.
@@ -124,4 +133,5 @@ export interface DragNodeAction extends Action {
 
 export type NodeAction<NodeType> =
   SelectNodeAction | DeleteNodeAction | DragStartNodeAction | DragEndNodeAction | DragNodeAction |
-  DragPotentialNodeAction | DragStartPotentialNodeAction | DragEndPotentialNodeAction | CreateNodeAction<NodeType>;
+  DragPotentialNodeAction | DragStartPotentialNodeAction | DragEndPotentialNodeAction | CreateNodeAction<NodeType> |
+  DeselectNodeAction;

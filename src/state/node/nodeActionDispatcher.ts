@@ -11,9 +11,18 @@ import {
   Size,
 } from 'diagramMaker/state/types';
 
+import { DeselectAction, WorkspaceActionsType } from 'diagramMaker/state';
 import {
-  CreateNodeAction, DragEndNodeAction, DragEndPotentialNodeAction, DragNodeAction, DragPotentialNodeAction,
-  DragStartNodeAction, DragStartPotentialNodeAction, NodeActionsType, SelectNodeAction,
+  CreateNodeAction,
+  DeselectNodeAction,
+  DragEndNodeAction,
+  DragEndPotentialNodeAction,
+  DragNodeAction,
+  DragPotentialNodeAction,
+  DragStartNodeAction,
+  DragStartPotentialNodeAction,
+  NodeActionsType,
+  SelectNodeAction,
 } from './nodeActions';
 
 export const MARGIN_PX = 10;
@@ -21,6 +30,12 @@ export const MARGIN_PX = 10;
 function createSelectNodeAction(id: string): SelectNodeAction {
   return {
     type: NodeActionsType.NODE_SELECT,
+    payload: { id },
+  };
+}
+function createDeselectNodeAction(id: string): DeselectNodeAction {
+  return {
+    type: NodeActionsType.NODE_DESELECT,
     payload: { id },
   };
 }
@@ -77,6 +92,12 @@ function createPotentialNodeDragEndAction(): DragEndPotentialNodeAction {
   };
 }
 
+function createDeselectAction(): DeselectAction {
+  return {
+    type: WorkspaceActionsType.WORKSPACE_DESELECT,
+  };
+}
+
 function createNewNodeAction<NodeType>(
   id: string,
   typeId: string,
@@ -107,10 +128,22 @@ function getSizeFromDataAttrs(target: NormalizedTarget): Size | undefined {
 export function handleNodeClick<NodeType, EdgeType>(
   store: Store<DiagramMakerData<NodeType, EdgeType>>,
   id: string | undefined,
+  withCtrl: boolean,
 ) {
-  if (id) {
-    const action = createSelectNodeAction(id);
-    store.dispatch(action);
+  if (!id) {
+    return;
+  }
+
+  if (!withCtrl) {
+    store.dispatch(createDeselectAction());
+  }
+
+  const nodeSelected = store.getState().nodes[id].diagramMakerData.selected;
+
+  if (withCtrl && nodeSelected) {
+    store.dispatch(createDeselectNodeAction(id));
+  } else {
+    store.dispatch(createSelectNodeAction(id));
   }
 }
 

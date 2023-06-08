@@ -150,11 +150,11 @@ export default class ActionDispatcher<NodeType, EdgeType> {
 
     switch (type) {
       case DiagramMakerComponentsType.NODE:
-        handleNodeClick(this.store, id);
+        handleNodeClick(this.store, id, event.originalEvent.ctrlKey);
         break;
       case (DiagramMakerComponentsType.EDGE_BADGE):
       case (DiagramMakerComponentsType.EDGE):
-        handleEdgeClick(this.store, id);
+        handleEdgeClick(this.store, id, event.originalEvent.ctrlKey);
         break;
       case (DiagramMakerComponentsType.WORKSPACE):
         handleWorkspaceClick(this.store);
