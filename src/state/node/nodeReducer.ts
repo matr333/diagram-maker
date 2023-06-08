@@ -3,7 +3,12 @@ import { Draft, produce } from 'immer';
 import { DiagramMakerAction } from 'diagramMaker/state/actions';
 import { EditorActionsType } from 'diagramMaker/state/editor/editorActions';
 import { GlobalActionsType } from 'diagramMaker/state/global/globalActions';
-import { DiagramMakerNode, DiagramMakerNodes, Position, Size, } from 'diagramMaker/state/types';
+import {
+  DiagramMakerNode,
+  DiagramMakerNodes,
+  Position,
+  Size,
+} from 'diagramMaker/state/types';
 import { WorkspaceActionsType } from 'diagramMaker/state/workspace';
 
 import { NodeActionsType } from './nodeActions';

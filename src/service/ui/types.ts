@@ -30,11 +30,6 @@ export enum DiagramMakerComponentsType {
    */
   NODE = 'DiagramMaker.Node',
   /**
-   * Used on nodes rendered by diagram maker.
-   * For internal use only.
-   */
-  NODE = 'DiagramMaker.Node',
-  /**
    * Used on node connectors displayed by diagram maker.
    * Can also be used within the node to make the entire node,
    * or parts of the node DOM be droppable for completion of edge creation
