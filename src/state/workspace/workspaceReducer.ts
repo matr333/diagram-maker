@@ -160,6 +160,11 @@ const focusReducer = (draftState: Draft<DiagramMakerWorkspace>, action: FocusNod
 
 const fitReducer = (draftState: Draft<DiagramMakerWorkspace>, action: FitAction) => {
   const { nodeRects } = action.payload;
+
+  if (!nodeRects?.length) {
+    return;
+  }
+
   let minX = draftState.canvasSize.width;
   let minY = draftState.canvasSize.height;
   let maxX = 0;

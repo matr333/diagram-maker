@@ -469,6 +469,19 @@ describe('workspaceReducer', () => {
       expect(workspaceReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state, getState1());
     });
+
+    it('should do nothing if nodeRects is empty', () => {
+      const state = getState1();
+      const action: FitAction = {
+        type: EditorActionsType.FIT,
+        payload: { nodeRects: [] },
+      };
+
+      const expectedState = getState1();
+
+      expect(workspaceReducer(state, action)).toEqual(expectedState);
+      checkReducerPurity(state, getState1());
+    });
   });
 
   describe('drag node outside workspace', () => {
