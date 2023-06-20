@@ -112,14 +112,15 @@
     "test": "tsc --noEmit -p . && jest --config jest.json",
     "test:dev": "tsc --noEmit -p . && jest --config jest.json --watch",
     "test:update": "tsc --noEmit -p . && jest --config jest.json --updateSnapshot",
+    "storybook": "build-storybook -o docs/",
     "release": "npm run lint && npm run test && npm run build && npm run release:integ && npm run documentation",
-    "build:integ": "build-storybook -o docs/",
+    "cypress": "tsc --noEmit -p ./cypress && cypress run --env coverage=true",
+    "build:integ": "npm run storybook",
     "lint:integ": "npx eslint --ext .js,.ts,.tsx integ/ -c integ/.eslintrc && eslint --ext .js,.ts,.tsx cypress/tests/ -c cypress/.eslintrc",
     "lint:integ:fix": "npx eslint --ext .js,.ts,.tsx integ/ -c integ/.eslintrc --fix && eslint --ext .js,.ts,.tsx cypress/tests/ -c cypress/.eslintrc --fix",
-    "test:integ": "npm run build:integ && tsc --noEmit -p ./cypress && cypress run --env coverage=true",
+    "test:integ": "npm run cypress",
     "test:integ:dev": "tsc --noEmit -p ./cypress && cypress open --config baseUrl=http://localhost:31213 --env coverage=true",
-    "release:integ": "npm run lint:integ && npm run test:integ",
-    "prepublishOnly": "npm run clean && npm run release"
+    "release:integ": "npm run lint:integ && npm run test:integ"
   },
   "repository": {
     "type": "git",
