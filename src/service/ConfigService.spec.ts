@@ -101,6 +101,10 @@ describe('ConfigService', () => {
   });
 
   describe('getBoundRenderContextMenu', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
     it('returns node context menu render callback bound to id for DiagramMaker.Node', () => {
       const id = 'testId';
       const boundCallback = configService.getBoundRenderContextMenu(DiagramMakerComponentsType.NODE, id) as any;
@@ -112,6 +116,14 @@ describe('ConfigService', () => {
     it('returns edge context menu render callback bound to id for DiagramMaker.Edge', () => {
       const id = 'testId';
       const boundCallback = configService.getBoundRenderContextMenu(DiagramMakerComponentsType.EDGE, id) as any;
+      boundCallback();
+      expect(renderEdgeContextMenu).toHaveBeenCalledWith(id);
+      expect(renderEdgeContextMenu).toHaveBeenCalledTimes(1);
+    });
+
+    it('returns edge context menu render callback bound to id for DiagramMaker.EdgeBadge', () => {
+      const id = 'testId';
+      const boundCallback = configService.getBoundRenderContextMenu(DiagramMakerComponentsType.EDGE_BADGE, id) as any;
       boundCallback();
       expect(renderEdgeContextMenu).toHaveBeenCalledWith(id);
       expect(renderEdgeContextMenu).toHaveBeenCalledTimes(1);

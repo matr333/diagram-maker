@@ -366,6 +366,7 @@ export default class ConfigService<NodeType, EdgeType> {
     switch (type) {
       case DiagramMakerComponentsType.NODE:
         return contextMenuCallbacks.node && contextMenuCallbacks.node.bind(null, id);
+      case DiagramMakerComponentsType.EDGE_BADGE:
       case DiagramMakerComponentsType.EDGE:
         return contextMenuCallbacks.edge && contextMenuCallbacks.edge.bind(null, id);
       case DiagramMakerComponentsType.PANEL:
