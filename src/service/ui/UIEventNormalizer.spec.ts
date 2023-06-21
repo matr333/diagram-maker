@@ -439,8 +439,8 @@ describe('UIEventNormalizer', () => {
       normalizedEvent = UIEventNormalizer.normalizeWheelEvent(event, contextOffset);
     });
 
-    it('normalizes the delta', () => {
-      expect(normalizedEvent.delta).toBe(deltaY);
+    it('normalizes the delta reducing it to the delta ratio', () => {
+      expect(normalizedEvent.delta).toBe(deltaY * 0.1);
     });
 
     it('normalizes the position', () => {
