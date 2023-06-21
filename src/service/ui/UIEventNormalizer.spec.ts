@@ -106,15 +106,103 @@ describe('UIEventNormalizer', () => {
   });
 
   describe('normalizeMouseUpEvent', () => {
-    it('calls normalizeMouseClickEvent', () => {
-      const type = MouseClickEventType.MOUSE_UP;
-      const event = new MouseEvent(type);
-      const normalizeMouseClickEventSpy = jest.spyOn(UIEventNormalizer, 'normalizeMouseClickEvent');
+    let event: any;
+    const type = MouseClickEventType.MOUSE_UP;
 
-      UIEventNormalizer.normalizeMouseUpEvent(event, contextOffset);
+    beforeEach(() => {
+      event = new MouseEvent(type);
+    });
 
-      expect(normalizeMouseClickEventSpy).toHaveBeenCalledTimes(1);
-      expect(normalizeMouseClickEventSpy).toHaveBeenCalledWith(event, contextOffset, type);
+    it('triggers even if it can\'t find a target with data-event-target', () => {
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseUpEvent(event, contextOffset);
+
+      expect(normalizedEvent).toBeDefined();
+    });
+
+    it('normalizes the type', () => {
+      const target = document.createElement('div');
+
+      target.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      Object.defineProperty(event, 'target', { value: target, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseUpEvent(event, contextOffset);
+
+      expect(normalizedEvent.type).toBe(type);
+    });
+
+    it('normalizes the position', () => {
+      const pageX = 250;
+      const pageY = 500;
+      const target = document.createElement('div');
+
+      target.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+
+      Object.defineProperty(event, 'pageX', { value: pageX, writable: true });
+      Object.defineProperty(event, 'pageY', { value: pageY, writable: true });
+      Object.defineProperty(event, 'target', { value: target, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseUpEvent(event, contextOffset);
+      const targetScreenPosition = target.getBoundingClientRect();
+
+      expect(normalizedEvent.position).toEqual({
+        x: pageX - contextOffset.x,
+        y: pageY - contextOffset.y,
+      });
+      expect(normalizedEvent.offset).toEqual({
+        x: pageX - targetScreenPosition.left - window.pageXOffset,
+        y: pageY - targetScreenPosition.top - window.pageYOffset,
+      });
+    });
+
+    it('attaches the original event', () => {
+      const target = document.createElement('div');
+
+      target.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      Object.defineProperty(event, 'target', { value: target, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseUpEvent(event, contextOffset);
+
+      expect(normalizedEvent.originalEvent).toBe(event);
+    });
+
+    it('normalizes the target', () => {
+      const originalTarget = document.createElement('div');
+      const id = '1234';
+      const normalizeTargetSpy = jest.spyOn(UITargetNormalizer, 'normalizeTarget');
+
+      originalTarget.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+      originalTarget.setAttribute('data-id', id);
+      originalTarget.setAttribute('data-type', type);
+      Object.defineProperty(event, 'target', { value: originalTarget, writable: true });
+
+      const normalizedEvent: any = UIEventNormalizer.normalizeMouseUpEvent(event, contextOffset);
+
+      expect(normalizedEvent.target).toEqual({ id, originalTarget, type });
+      expect(normalizeTargetSpy).toHaveBeenCalledTimes(1);
+      expect(normalizeTargetSpy).toHaveBeenCalledWith(originalTarget);
+    });
+
+    it('normalizes the mouse button', () => {
+      const buttonsToTest = [
+        MouseButton.LEFT,
+        MouseButton.MIDDLE,
+        MouseButton.RIGHT,
+        MouseButton.BROWSER_BACK,
+        MouseButton.BROWSER_FORWARD,
+      ];
+
+      buttonsToTest.forEach((button) => {
+        event = new MouseEvent(type, { button });
+
+        const target = document.createElement('div');
+
+        target.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
+        Object.defineProperty(event, 'target', { value: target, writable: true });
+
+        const normalizedEvent: any = UIEventNormalizer.normalizeMouseUpEvent(event, contextOffset);
+
+        expect(normalizedEvent.button).toBe(button);
+      });
     });
   });
 

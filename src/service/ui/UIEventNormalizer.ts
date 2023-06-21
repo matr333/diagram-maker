@@ -72,6 +72,15 @@ export interface NormalizedMouseClickEvent {
   type: MouseClickEventType;
 }
 
+export interface NormalizedMouseUpEvent {
+  originalEvent: MouseEvent;
+  button: MouseButton;
+  position: Position;
+  target?: NormalizedTarget;
+  offset?: Position;
+  type: MouseClickEventType;
+}
+
 export interface NormalizedDragEvent {
   position: Position;
   target: NormalizedTarget;
@@ -112,7 +121,8 @@ export interface NormalizedKeyboardEvent {
 
 export type NormalizedEvent =
   NormalizedContainerEvent | NormalizedMouseMoveEvent | NormalizedDragEvent | NormalizedWindowEvent |
-  NormalizedMouseScrollEvent | NormalizedMouseClickEvent | NormalizedKeyboardEvent | NormalizedMouseHoverEvent;
+  NormalizedMouseScrollEvent | NormalizedMouseClickEvent | NormalizedKeyboardEvent | NormalizedMouseHoverEvent |
+  NormalizedMouseUpEvent;
 
 export function getRequiredAttribute(type: EventType): EventAttribute | undefined {
   switch (type) {
@@ -198,8 +208,34 @@ export default class UIEventNormalizer {
   public static normalizeMouseUpEvent(
     event: MouseEvent,
     contextOffset: Position,
-  ): NormalizedMouseClickEvent | undefined {
-    return UIEventNormalizer.normalizeMouseClickEvent(event, contextOffset, MouseClickEventType.MOUSE_UP);
+  ): NormalizedMouseUpEvent | undefined {
+    const type = MouseClickEventType.MOUSE_UP;
+    const requiredAttribute = getRequiredAttribute(type);
+    const targetElement = UITargetNormalizer.getTarget(event, requiredAttribute);
+
+    const { pageX, pageY, button } = event;
+    const pagePosition = { x: pageX, y: pageY };
+    const position = fromPageToContainer(pagePosition, contextOffset);
+    const targetScreenPosition = targetElement?.getBoundingClientRect();
+    const targetPagePosition = targetScreenPosition ? fromScreenToPage(targetScreenPosition) : undefined;
+
+    // We are calculating the offset here instead of using the
+    // event's offset/layer prop because we need to calculate
+    // offset relative to the filtered target, not the actual target.
+
+    const offset: Position | undefined = targetPagePosition ? subtract(pagePosition, targetPagePosition) : undefined;
+
+    const originalEvent = event;
+    const target = targetElement ? UITargetNormalizer.normalizeTarget(targetElement) : undefined;
+
+    return {
+      button,
+      offset,
+      originalEvent,
+      position,
+      target,
+      type,
+    };
   }
 
   public static normalizeMouseDownEvent(
