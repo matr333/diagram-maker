@@ -246,12 +246,11 @@ export default class UIEventNormalizer {
   }
 
   public static normalizeWheelEvent(event: WheelEvent, contextOffset: Position): NormalizedMouseScrollEvent {
-    const DELTA_RATIO = 0.1;
     const { deltaY, pageX, pageY } = event;
     const pagePosition = { x: pageX, y: pageY };
 
     return {
-      delta: deltaY * DELTA_RATIO,
+      delta: deltaY,
       originalEvent: event,
       position: fromPageToContainer(pagePosition, contextOffset),
       type: WheelEventType.MOUSE_WHEEL,

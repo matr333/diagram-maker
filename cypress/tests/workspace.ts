@@ -53,7 +53,7 @@ describe('DiagramMaker.Workspace', () => {
 
   describe('zoom workspace', () => {
     it('zooms in the workspace when user scrolls mouse wheel down on the workspace', () => {
-      const expectedTransform = convertScaleToMatrix(1.3);
+      const expectedTransform = convertScaleToMatrix(1.05);
       getWorkspace()
         .trigger('wheel', {
           deltaY: -50, pageX: 0, pageY: 0, force: true,
@@ -62,7 +62,7 @@ describe('DiagramMaker.Workspace', () => {
     });
 
     it('zooms out the workspace when user scrolls mouse wheel up on the workspace', () => {
-      const expectedTransform = convertScaleToMatrix(0.7);
+      const expectedTransform = convertScaleToMatrix(0.95);
       getWorkspace()
         .trigger('wheel', {
           deltaY: 50, pageX: 0, pageY: 0, force: true,
@@ -75,7 +75,7 @@ describe('DiagramMaker.Workspace', () => {
       const expectedTransform = convertScaleToMatrix(maxScale);
       getWorkspace()
         .trigger('wheel', {
-          deltaY: -500, pageX: 0, pageY: 0, force: true,
+          deltaY: -5000, pageX: 0, pageY: 0, force: true,
         });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
@@ -87,7 +87,7 @@ describe('DiagramMaker.Workspace', () => {
       const expectedTransform = convertScaleToMatrix(excpectedScale);
       getWorkspace()
         .trigger('wheel', {
-          deltaY: 500, pageX: 0, pageY: 0, force: true,
+          deltaY: 5000, pageX: 0, pageY: 0, force: true,
         });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
@@ -100,7 +100,7 @@ describe('DiagramMaker.Workspace', () => {
       const expectedTransform = convertScaleToMatrix(minScale);
       getWorkspace()
         .trigger('wheel', {
-          deltaY: 500, pageX: 0, pageY: 0, force: true,
+          deltaY: 5000, pageX: 0, pageY: 0, force: true,
         });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });

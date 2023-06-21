@@ -16,7 +16,7 @@ import {
 const ZoomDefaults = {
   MAX: 3,
   MIN: 0.3,
-  SPEED: 0.006,
+  SPEED: 0.001,
 };
 
 const FIT_BUFFER = 50;

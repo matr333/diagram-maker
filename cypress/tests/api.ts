@@ -99,7 +99,7 @@ describe('DiagramMaker.API', () => {
 
       it('allows workspace zooming', () => {
         getElementByDataIdAndType(readOnlyId, toolsType).click();
-        const expectedTransform = convertScaleToMatrix(1.3);
+        const expectedTransform = convertScaleToMatrix(1.05);
         getWorkspace()
           .trigger('wheel', {
             deltaY: -50, pageX: 0, pageY: 0, force: true,
@@ -225,7 +225,7 @@ describe('DiagramMaker.API', () => {
     const focusSelectedId = 'FocusSelected';
     describe('when nothing is selected', () => {
       it('centers the workspace & resets the zoom', () => {
-        const expectedTransform = convertScaleToMatrix(1.3);
+        const expectedTransform = convertScaleToMatrix(1.05);
         getWorkspace()
           .trigger('wheel', {
             deltaY: -50, pageX: 0, pageY: 0, force: true,
@@ -323,7 +323,7 @@ describe('DiagramMaker.API', () => {
     const zoomInId = 'ZoomIn';
     it('zooms in the workspace based on center of the viewport', () => {
       getElementByDataIdAndType(zoomInId, toolsType).click();
-      const zoomFactor = 0.3;
+      const zoomFactor = 0.05;
       const newZoom = 1 + zoomFactor;
       const viewportCenter = { x: viewport.width / 2, y: viewport.height / 2 };
 
@@ -338,7 +338,7 @@ describe('DiagramMaker.API', () => {
     const zoomOutId = 'ZoomOut';
     it('zooms out the workspace based on center of the viewport', () => {
       getElementByDataIdAndType(zoomOutId, toolsType).click();
-      const zoomFactor = 0.3;
+      const zoomFactor = 0.05;
       const newZoom = 1 - zoomFactor;
       const viewportCenter = { x: viewport.width / 2, y: viewport.height / 2 };
 
@@ -354,7 +354,7 @@ describe('DiagramMaker.API', () => {
     const resetZoomId = 'ResetZoom';
     it('resets the zooms based on center of the viewport', () => {
       getElementByDataIdAndType(zoomOutId, toolsType).click();
-      const zoomFactor = 0.3;
+      const zoomFactor = 0.05;
       const newZoom = 1 - zoomFactor;
       const expectedZoomedTransform = convertScaleToMatrix(newZoom);
       getWorkspace().should('have.css', 'transform').and('eq', expectedZoomedTransform);

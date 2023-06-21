@@ -99,11 +99,11 @@ describe('workspaceReducer', () => {
   it('changes workspace scale and adjusts position when workspace zoom action is fired', () => {
     const state = getState1();
     const position = getMousePosition();
-    const zoom = 4;
-    const expectedZoom = 1.024;
+    const zoom = 10;
+    const expectedZoom = 1.01;
     const expectedPosition = {
-      x: -2,
-      y: -2,
+      x: -1,
+      y: -1,
     };
 
     const action: ZoomWorkspaceAction = {
