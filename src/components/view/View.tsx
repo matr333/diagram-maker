@@ -512,6 +512,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
         edgeStyle={edgeStyle}
         selected={edges[edgeKey].diagramMakerData.selected}
         showArrowhead={this.props.configService.getShowArrowhead()}
+        className={edges[edgeKey].diagramMakerData.classNames}
       />
     );
   }

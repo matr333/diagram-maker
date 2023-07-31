@@ -129,6 +129,10 @@ export interface DiagramMakerNode<NodeType> {
      * Initial position for the latest Drag Start action
      */
     readonly startDragPosition?: Position;
+    /**
+     * Additional class names
+     */
+    readonly classNames?: string[];
   };
   /** Contains data managed by the consumer */
   readonly consumerData?: NodeType;
@@ -186,6 +190,8 @@ export interface DiagramMakerEdge<EdgeType> {
   readonly diagramMakerData: {
     /** Denotes whether the edge is selected */
     readonly selected?: boolean;
+    /** Additional class names */
+    readonly classNames?: string[];
   };
   /** Contains data managed by the consumer */
   readonly consumerData?: EdgeType;

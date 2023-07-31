@@ -31,7 +31,7 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
 
     return (
       <div
-        className="dm-node"
+        className={`dm-node ${diagramMakerData.classNames?.join(' ') || ''}`}
         style={{ width, height, transform }}
         data-id={id}
         data-type={DiagramMakerComponentsType.NODE}
