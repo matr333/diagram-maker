@@ -2,7 +2,7 @@
 
 exports[`Node renders at the given position and size 1`] = `
 <div
-  className="dm-node"
+  className="dm-node "
   data-draggable={true}
   data-event-target={true}
   data-id="myNode"
@@ -24,7 +24,7 @@ exports[`Node renders at the given position and size 1`] = `
 
 exports[`Node renders connectors on the left and right 1`] = `
 <div
-  className="dm-node"
+  className="dm-node "
   data-draggable={true}
   data-event-target={true}
   data-id="myNode"
@@ -68,7 +68,7 @@ exports[`Node renders connectors on the left and right 1`] = `
 
 exports[`Node renders connectors on the top and bottom 1`] = `
 <div
-  className="dm-node"
+  className="dm-node "
   data-draggable={true}
   data-event-target={true}
   data-id="myNode"
@@ -112,7 +112,7 @@ exports[`Node renders connectors on the top and bottom 1`] = `
 
 exports[`Node renders without any connectors 1`] = `
 <div
-  className="dm-node"
+  className="dm-node "
   data-draggable={true}
   data-event-target={true}
   data-id="myNode"
@@ -134,7 +134,7 @@ exports[`Node renders without any connectors 1`] = `
 
 exports[`Node visibleConnectorTypes renders connector only for input 1`] = `
 <div
-  className="dm-node"
+  className="dm-node "
   data-draggable={true}
   data-event-target={true}
   data-id="myNode"
@@ -167,7 +167,7 @@ exports[`Node visibleConnectorTypes renders connector only for input 1`] = `
 
 exports[`Node visibleConnectorTypes renders connector only for output 1`] = `
 <div
-  className="dm-node"
+  className="dm-node "
   data-draggable={true}
   data-event-target={true}
   data-id="myNode"
@@ -200,7 +200,7 @@ exports[`Node visibleConnectorTypes renders connector only for output 1`] = `
 
 exports[`Node visibleConnectorTypes renders input & output connectors 1`] = `
 <div
-  className="dm-node"
+  className="dm-node "
   data-draggable={true}
   data-event-target={true}
   data-id="myNode"
@@ -244,7 +244,7 @@ exports[`Node visibleConnectorTypes renders input & output connectors 1`] = `
 
 exports[`Node visibleConnectorTypes renders no connectors 1`] = `
 <div
-  className="dm-node"
+  className="dm-node "
   data-draggable={true}
   data-event-target={true}
   data-id="myNode"
