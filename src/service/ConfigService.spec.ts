@@ -280,4 +280,13 @@ describe('ConfigService', () => {
       expect(configService.getVisibleConnectorTypesForNodeType(type)).toBeUndefined();
     });
   });
+  describe('handlers', () => {
+    it('returns undefined if onCopyHandler callback is not defined', () => {
+      expect(configService.onCopyHandler()).toBeUndefined();
+    });
+
+    it('returns undefined if onPasteHandler callback is not defined', () => {
+      expect(configService.onPasteHandler()).toBeUndefined();
+    });
+  });
 });
