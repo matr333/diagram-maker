@@ -408,13 +408,23 @@ export default class ActionDispatcher<NodeType, EdgeType> {
   // This isn't an issue with delete, but it may cause an issue if
   // we were doing something like duplicating a node via keypress.
 
-  private handleKeyDown = (event: NormalizedKeyboardEvent): void => {
+  private handleKeyDown = async (event: NormalizedKeyboardEvent): Promise<any> => {
     const { key, modKey } = event;
 
     switch (key) {
       case KeyboardKey.A:
         if (modKey) {
           handleSelectAll(this.store);
+        }
+        break;
+      case KeyboardKey.C:
+        if (modKey) {
+          this.config.onCopyHandler();
+        }
+        break;
+      case KeyboardKey.V:
+        if (modKey) {
+          this.config.onPasteHandler();
         }
         break;
       case KeyboardCode.DELETE:

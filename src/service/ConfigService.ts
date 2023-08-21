@@ -325,6 +325,11 @@ export interface DiagramMakerConfig<NodeType, EdgeType> {
   nodeTypeConfig?: {
     [typeId: string]: DiagramMakerNodeTypeConfiguration;
   };
+
+  handlers?: {
+    onCopyHandler: () => void;
+    onPasteHandler: () => void;
+  }
 }
 export default class ConfigService<NodeType, EdgeType> {
   constructor(private config: DiagramMakerConfig<NodeType, EdgeType>) {
@@ -411,6 +416,14 @@ export default class ConfigService<NodeType, EdgeType> {
     return typeConfig && typeConfig.visibleConnectorTypes;
   };
 
+  public onCopyHandler = () => {
+    this.config?.handlers?.onCopyHandler?.();
+  };
+
+  public onPasteHandler = () => {
+    this.config?.handlers?.onPasteHandler?.();
+  };
+
   private getNodeTypeConfiguration = (
     typeId: string,
   ): DiagramMakerNodeTypeConfiguration | undefined => this.config.nodeTypeConfig && this.config.nodeTypeConfig[typeId];
@@ -418,4 +431,5 @@ export default class ConfigService<NodeType, EdgeType> {
   private getRenderContextMenu = (): ContextMenuRenderCallbacks | undefined => this.getRenderCallbacks().contextMenu;
 
   private getRenderCallbacks = (): RenderCallbacks<NodeType, EdgeType> => this.config.renderCallbacks;
+
 }
