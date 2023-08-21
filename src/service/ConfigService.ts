@@ -431,5 +431,4 @@ export default class ConfigService<NodeType, EdgeType> {
   private getRenderContextMenu = (): ContextMenuRenderCallbacks | undefined => this.getRenderCallbacks().contextMenu;
 
   private getRenderCallbacks = (): RenderCallbacks<NodeType, EdgeType> => this.config.renderCallbacks;
-
 }
