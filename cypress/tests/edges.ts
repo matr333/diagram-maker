@@ -23,7 +23,7 @@ describe('DiagramMaker.Edges', () => {
 
       it('renders potential edge', () => {
         const outputNode = getNodeById('node2');
-        const outputConnector = outputNode.children('.dm-connector-output');
+        const outputConnector = outputNode.find('.dm-connector-output');
 
         dragStartElement(outputConnector, { pageX: 0, pageY: 0 });
 

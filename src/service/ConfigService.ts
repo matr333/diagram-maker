@@ -1,8 +1,16 @@
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import { ActionInterceptor } from 'diagramMaker/state/middleware';
 import {
-  DiagramMakerData, DiagramMakerEdge, DiagramMakerNode, DiagramMakerPanel, DiagramMakerPotentialNode, Position, Size,
+  DiagramMakerConnector,
+  DiagramMakerData,
+  DiagramMakerEdge,
+  DiagramMakerNode,
+  DiagramMakerPanel,
+  DiagramMakerPotentialNode,
+  Position,
+  Size,
 } from 'diagramMaker/state/types';
+import { noop } from 'lodash-es';
 
 export enum ConnectorPlacementType {
   /**
@@ -38,6 +46,12 @@ export const ConnectorPlacement = {
 };
 
 export type BoundRenderCallback = (
+  diagramMakerContainer: HTMLElement,
+  consumerContainer?: HTMLElement | void
+) => (HTMLElement | undefined | void);
+
+export type ConnectorRenderCallback = (
+  connector: DiagramMakerConnector,
   diagramMakerContainer: HTMLElement,
   consumerContainer?: HTMLElement | void
 ) => (HTMLElement | undefined | void);
@@ -163,6 +177,12 @@ interface RenderCallbacks<NodeType, EdgeType> {
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
   ) => (HTMLElement | undefined | void);
+
+  connector?: (
+    connector: DiagramMakerConnector,
+    diagramMakerContainer: HTMLElement,
+    consumerContainer?: HTMLElement | void
+  ) => (HTMLElement | undefined | void);
   /**
    * Callback to render a potential node. Optional. Only useful when user might be dragging new nodes out of a panel.
    * @param {DiagramMakerPotentialNode} - The object representing the current state of the potential node
@@ -180,6 +200,7 @@ interface RenderCallbacks<NodeType, EdgeType> {
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
   ) => (HTMLElement | undefined | void);
+
   /** Object containing render callbacks for several panels keyed on panel name */
   panels: {
     /**
@@ -359,6 +380,12 @@ export default class ConfigService<NodeType, EdgeType> {
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
   ) => (HTMLElement | undefined | void)) | undefined => this.getRenderCallbacks().potentialNode;
+
+  public getRenderConnector = (): (
+    connector: DiagramMakerConnector,
+    diagramMakerContainer: HTMLElement,
+    consumerContainer?: HTMLElement | void
+  ) => (HTMLElement | undefined | void) => this.getRenderCallbacks().connector || noop;
 
   public getRenderDestroy = (): DestroyCallback => this.getRenderCallbacks().destroy;
 

@@ -146,19 +146,19 @@ describe('DiagramMaker.API', () => {
 
         const inputNode = getNodeById('node1');
 
-        inputNode.children('.dm-connector-input').then((el) => {
+        inputNode.find('.dm-connector-input').then((el) => {
           const rect = el[0].getBoundingClientRect();
 
           const x = rect.left + rect.width / 2;
           const y = rect.top + rect.height / 2;
 
           let outputNode = getNodeById('node2');
-          let outputConnector = outputNode.children('.dm-connector-output');
+          let outputConnector = outputNode.find('.dm-connector-output');
           dragStartElement(outputConnector, { pageX: 0, pageY: 0 });
           getPotentialEdge().should('not.exist');
 
           outputNode = getNodeById('node2');
-          outputConnector = outputNode.children('.dm-connector-output');
+          outputConnector = outputNode.find('.dm-connector-output');
           dropElement(outputConnector, { pageX: x, pageY: y });
           getAllEdges().should('have.length', 1);
         });
@@ -393,12 +393,12 @@ describe('DiagramMaker.API', () => {
 
       const inputNode = getNodeById('node1');
 
-      inputNode.children('.dm-connector-input').then((el) => {
+      inputNode.find('.dm-connector-input').then((el) => {
         const rect = el[0].getBoundingClientRect();
         const x = rect.left + rect.width / 2;
         const y = rect.top + rect.height / 2;
         const outputNode = getNodeById('node2');
-        const outputConnector = outputNode.children('.dm-connector-output');
+        const outputConnector = outputNode.find('.dm-connector-output');
         dragAndDropElement(outputConnector, { pageX: x, pageY: y });
         getAllEdges().should('have.length', 2);
         getElementByDataIdAndType(undoId, toolsType).click();

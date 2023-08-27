@@ -7,6 +7,7 @@ import {
 } from 'diagramMaker/service/ConfigService';
 import { CreateEdgeAction } from 'diagramMaker/state/edge/edgeActions';
 import {
+  DiagramMakerConnector,
   DiagramMakerData, DiagramMakerEdge, DiagramMakerNode, DiagramMakerPotentialNode,
 } from 'diagramMaker/state/types';
 import 'preact/devtools';
@@ -21,7 +22,7 @@ import LeftRightRectangularData from './LeftRightRectangular/data';
 import PluginsData from './Plugins/data';
 import TopBottomRectangularData from './TopBottomRectangular/data';
 import {
-  addDevTools, createCircularNode, createEdgeContextMenu, createLibraryPanel, createNodeContextMenu,
+  addDevTools, createCircularNode, createDivWithText, createEdgeContextMenu, createLibraryPanel, createNodeContextMenu,
   createNodeWithDropdown, createNodeWithInput, createPanelContextMenu, createPluginPanel, createPotentialNode,
   createRectangularConnectorNode, createRectangularNode, createToolsPanel, createWorkspaceContextMenu,
   handleTestPluginEvent, updateActionInLogger,
@@ -119,6 +120,11 @@ const Template = ({
         } : undefined,
         potentialNode:
           (node: DiagramMakerPotentialNode, container: HTMLElement) => createPotentialNode(node, container),
+        connector: (connector: DiagramMakerConnector, container: HTMLElement) => {
+          const div = createDivWithText(connector.id);
+          container.appendChild(div);
+          return div;
+        },
         panels: {
           library: (panel: any, state: any, container: HTMLElement) => createLibraryPanel(container),
           ...(plugin && {

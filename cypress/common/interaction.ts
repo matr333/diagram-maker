@@ -158,14 +158,14 @@ export function triggerKeyboardEvent(
 export function createEdgeBetween(srcNode: string, destNode: string) {
   const inputNode = getNodeById(destNode);
 
-  inputNode.children('.dm-connector-input').then((el) => {
+  inputNode.find('.dm-connector-input').then((el) => {
     const rect = el[0].getBoundingClientRect();
 
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
 
     const outputNode = getNodeById(srcNode);
-    const outputConnector = outputNode.children('.dm-connector-output');
+    const outputConnector = outputNode.find('.dm-connector-output');
 
     dragAndDropElement(outputConnector, { pageX: x, pageY: y });
   });

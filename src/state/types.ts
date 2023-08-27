@@ -2,6 +2,7 @@ import { UndoHistoryState } from 'redux-undo-redo';
 
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import { DiagramMakerAction } from 'diagramMaker/state/actions';
+import { ConnectorType } from 'diagramMaker/components';
 
 export interface Position {
   x: number;
@@ -340,4 +341,10 @@ export interface DiagramMakerData<NodeType, EdgeType> {
   readonly editor: DiagramMakerEditor;
   /** History of undoable actions */
   readonly undoHistory?: UndoHistoryState<DiagramMakerAction<NodeType, EdgeType>>;
+}
+
+export interface DiagramMakerConnector {
+  id: string;
+  type: ConnectorType;
+  position: Position;
 }

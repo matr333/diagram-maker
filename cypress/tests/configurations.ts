@@ -497,14 +497,14 @@ describe('DiagramMaker.Configurations', () => {
 
           const inputNode = getNodeById(newNodeIds[0]);
 
-          inputNode.children('.dm-connector-input').then((el) => {
+          inputNode.find('.dm-connector-input').then((el) => {
             const rect = el[0].getBoundingClientRect();
 
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
 
             const outputNode = getNodeById(newNodeIds[1]);
-            const outputConnector = outputNode.children('.dm-connector-output');
+            const outputConnector = outputNode.find('.dm-connector-output');
 
             dragAndDropElement(outputConnector, { pageX: x, pageY: y });
 

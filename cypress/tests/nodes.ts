@@ -24,7 +24,7 @@ describe('DiagramMaker.Nodes', () => {
     it('renders input connector', () => {
       const expectedTransform = convertTranslate2dToMatrix(0, 25);
       const node = getNodeById('node1');
-      const inputConnector = node.children('.dm-connector-input');
+      const inputConnector = node.find('.dm-connector-input');
       inputConnector.should('have.length', 1);
       inputConnector.should('have.css', 'transform').and('eq', expectedTransform);
     });
@@ -32,7 +32,7 @@ describe('DiagramMaker.Nodes', () => {
     it('renders output connector', () => {
       const expectedTransform = convertTranslate2dToMatrix(100, 25);
       const node = getNodeById('node1');
-      const inputConnector = node.children('.dm-connector-output');
+      const inputConnector = node.find('.dm-connector-output');
       inputConnector.should('have.length', 1);
       inputConnector.should('have.css', 'transform').and('eq', expectedTransform);
     });

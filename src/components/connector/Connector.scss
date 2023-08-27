@@ -27,3 +27,20 @@ $dotSize: 14px;
     border-radius: 100%;
   }
 }
+
+.dm-connector-wrapper {
+  .connector-one,
+  .connector-two {
+    transition: all .5s;
+  }
+
+  &:hover .connector-one {
+    top: -15px;
+    left: 15px;
+  }
+
+  &:hover .connector-two {
+    top: 15px;
+    left: 15px;
+  }
+}

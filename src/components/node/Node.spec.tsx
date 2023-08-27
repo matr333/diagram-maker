@@ -40,6 +40,7 @@ describe('Node', () => {
         diagramMakerNode={getDiagramMakerNode()}
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
+        renderConnectorCallback={() => {}}
       />,
     );
 
@@ -52,6 +53,7 @@ describe('Node', () => {
         diagramMakerNode={getDiagramMakerNode()}
         renderCallback={renderCallback}
         destroyCallback={destroyCallback}
+        renderConnectorCallback={() => {}}
       />,
     );
 
@@ -65,6 +67,7 @@ describe('Node', () => {
         renderCallback={renderCallback}
         connectorPlacement={ConnectorPlacement.TOP_BOTTOM}
         destroyCallback={destroyCallback}
+        renderConnectorCallback={() => {}}
       />,
     );
 
@@ -78,6 +81,7 @@ describe('Node', () => {
         renderCallback={renderCallback}
         connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
         destroyCallback={destroyCallback}
+        renderConnectorCallback={() => {}}
       />,
     );
 
@@ -95,6 +99,7 @@ describe('Node', () => {
           connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
           destroyCallback={destroyCallback}
           visibleConnectorTypes={visibleConnectorTypes}
+          renderConnectorCallback={() => {}}
         />,
       );
 
@@ -111,6 +116,7 @@ describe('Node', () => {
           connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
           destroyCallback={destroyCallback}
           visibleConnectorTypes={visibleConnectorTypes}
+          renderConnectorCallback={() => {}}
         />,
       );
 
@@ -127,6 +133,7 @@ describe('Node', () => {
           connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
           destroyCallback={destroyCallback}
           visibleConnectorTypes={visibleConnectorTypes}
+          renderConnectorCallback={() => {}}
         />,
       );
 
@@ -143,6 +150,7 @@ describe('Node', () => {
           connectorPlacement={ConnectorPlacement.LEFT_RIGHT}
           destroyCallback={destroyCallback}
           visibleConnectorTypes={visibleConnectorTypes}
+          renderConnectorCallback={() => {}}
         />,
       );
 
@@ -158,6 +166,7 @@ describe('Node', () => {
           diagramMakerNode={nodeData}
           renderCallback={renderCallback}
           destroyCallback={destroyCallback}
+          renderConnectorCallback={() => {}}
         />,
       );
 
@@ -177,6 +186,7 @@ describe('Node', () => {
           diagramMakerNode={nodeData}
           renderCallback={renderCallback}
           destroyCallback={destroyCallback}
+          renderConnectorCallback={() => {}}
         />,
       );
 

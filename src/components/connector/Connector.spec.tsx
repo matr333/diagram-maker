@@ -11,6 +11,8 @@ describe('Connector', () => {
         id="test"
         position={{ x: 150, y: 300 }}
         type={ConnectorType.OUTPUT}
+        renderCallback={() => {}}
+        destroyCallback={() => {}}
       />,
     );
 
@@ -23,6 +25,8 @@ describe('Connector', () => {
         id="test"
         position={{ x: 150, y: 300 }}
         type={ConnectorType.INPUT}
+        renderCallback={() => {}}
+        destroyCallback={() => {}}
       />,
     );
 

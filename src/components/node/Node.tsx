@@ -1,12 +1,15 @@
 import * as Preact from 'preact';
 
 import { ComposeView } from 'diagramMaker/components/common';
+import { Connector, ConnectorProps, ConnectorType } from 'diagramMaker/components/connector';
 import {
-  Connector, ConnectorProps, ConnectorType,
-} from 'diagramMaker/components/connector';
-import {
-  BoundRenderCallback, ConnectorPlacement, ConnectorPlacementType, DestroyCallback,
-  TypeForVisibleConnectorTypes, VisibleConnectorTypes,
+  BoundRenderCallback,
+  ConnectorPlacement,
+  ConnectorPlacementType,
+  ConnectorRenderCallback,
+  DestroyCallback,
+  TypeForVisibleConnectorTypes,
+  VisibleConnectorTypes,
 } from 'diagramMaker/service/ConfigService';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 import { DiagramMakerNode } from 'diagramMaker/state/types';
@@ -16,6 +19,7 @@ import './Node.scss';
 export interface NodeProps<NodeType> {
   connectorPlacement?: ConnectorPlacementType;
   renderCallback: BoundRenderCallback;
+  renderConnectorCallback: ConnectorRenderCallback;
   destroyCallback: DestroyCallback;
   diagramMakerNode: DiagramMakerNode<NodeType>;
   visibleConnectorTypes?: TypeForVisibleConnectorTypes;
@@ -53,7 +57,7 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
 
   private getConnectors(): ConnectorProps[] {
     const { id, diagramMakerData } = this.props.diagramMakerNode;
-    const { connectorPlacement } = this.props;
+    const { connectorPlacement, renderConnectorCallback, destroyCallback } = this.props;
     const { width, height } = diagramMakerData.size;
     const horizontalCenter = width / 2;
     const verticalCenter = height / 2;
@@ -62,13 +66,53 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
     switch (connectorPlacement) {
       case ConnectorPlacement.LEFT_RIGHT:
         return [
-          { id, position: { x: 0, y: verticalCenter }, type: INPUT },
-          { id, position: { x: width, y: verticalCenter }, type: OUTPUT },
+          {
+            id,
+            position: { x: 0, y: verticalCenter },
+            type: INPUT,
+            renderCallback: renderConnectorCallback.bind(null, {
+              id,
+              position: { x: 0, y: verticalCenter },
+              type: INPUT,
+            }),
+            destroyCallback,
+          },
+          {
+            id,
+            position: { x: width, y: verticalCenter },
+            type: OUTPUT,
+            renderCallback: renderConnectorCallback.bind(null, {
+              id,
+              position: { x: width, y: verticalCenter },
+              type: OUTPUT,
+            }),
+            destroyCallback,
+          },
         ];
       case ConnectorPlacement.TOP_BOTTOM:
         return [
-          { id, position: { x: horizontalCenter, y: 0 }, type: INPUT },
-          { id, position: { x: horizontalCenter, y: height }, type: OUTPUT },
+          {
+            id,
+            position: { x: horizontalCenter, y: 0 },
+            type: INPUT,
+            renderCallback: renderConnectorCallback.bind(null, {
+              id,
+              position: { x: horizontalCenter, y: 0 },
+              type: INPUT,
+            }),
+            destroyCallback,
+          },
+          {
+            id,
+            position: { x: horizontalCenter, y: height },
+            type: OUTPUT,
+            renderCallback: renderConnectorCallback.bind(null, {
+              id,
+              position: { x: horizontalCenter, y: height },
+              type: OUTPUT,
+            }),
+            destroyCallback,
+          },
         ];
       default:
         return [];
@@ -97,8 +141,19 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
 
   private renderConnectors(): JSX.Element[] {
     return this.getFilteredConnectors().map((connector) => {
-      const { id, type, position } = connector;
-      return <Connector key={`${id}-${type}`} id={id} type={type} position={position} />;
+      const {
+        id, type, position, renderCallback, destroyCallback,
+      } = connector;
+      return (
+        <Connector
+          key={`${id}-${type}`}
+          id={id}
+          type={type}
+          position={position}
+          renderCallback={renderCallback}
+          destroyCallback={destroyCallback}
+        />
+      );
     });
   }
 }
