@@ -39,6 +39,8 @@ export enum KeyboardKey {
   A = 'a',
   C = 'c',
   V = 'v',
+  Z = 'z',
+  Z_CAP = 'Z',
 }
 
 export enum EventAttribute {

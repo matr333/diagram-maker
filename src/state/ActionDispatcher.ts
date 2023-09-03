@@ -70,6 +70,7 @@ import {
   handleWorkspaceResize,
   handleWorkspaceZoom,
 } from 'diagramMaker/state/workspace/workspaceActionDispatcher';
+import { actions as undoActions } from 'redux-undo-redo';
 
 const DATA_ATTR_TYPE = 'data-type';
 export default class ActionDispatcher<NodeType, EdgeType> {
@@ -398,6 +399,14 @@ export default class ActionDispatcher<NodeType, EdgeType> {
     handleHideContextMenu(this.store);
   };
 
+  private handleCtrlZ = (_event: NormalizedKeyboardEvent): void => {
+    this.store.dispatch(undoActions.undo());
+  };
+
+  private handleCtrlShiftZ = (_event: NormalizedKeyboardEvent): void => {
+    this.store.dispatch(undoActions.redo());
+  };
+
   // @NOTE Justification for using KeyDown as opposed to KeyUp or KeyPress for the Delete event:
   // 1) We cannot use KeyPress for the Delete key (or other non-printable keys).
   //    See: https://stackoverflow.com/questions/1116244/capturing-delete-keypress-with-jquery
@@ -425,6 +434,16 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       case KeyboardKey.V:
         if (modKey) {
           this.config.onPasteHandler();
+        }
+        break;
+      case KeyboardKey.Z:
+        if (modKey) {
+          this.handleCtrlZ(event);
+        }
+        break;
+      case KeyboardKey.Z_CAP:
+        if (modKey) {
+          this.handleCtrlShiftZ(event);
         }
         break;
       case KeyboardCode.DELETE:
