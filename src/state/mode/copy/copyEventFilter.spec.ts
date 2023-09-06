@@ -44,6 +44,17 @@ describe('copyEventFilter', () => {
     expect(result).toBe(true);
   });
 
+  it('allows KEY_DOWN events', () => {
+    const event = {
+      type: KeyboardEventType.KEY_DOWN,
+      key: 'c'
+    };
+
+    const result = copyEventFilter(event as NormalizedEvent);
+
+    expect(result).toBe(true);
+  });
+
   it('does not allow DRAG_START events when the target is not the workspace', () => {
     const event = {
       target: {
