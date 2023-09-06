@@ -45,6 +45,19 @@ describe('copyEventFilter', () => {
     expect(result).toBe(true);
   });
 
+  it('does not allow DRAG_START events when the target is not the workspace', () => {
+    const event = {
+      target: {
+        type: DiagramMakerComponentsType.NODE,
+      },
+      type: DragEventType.DRAG_START,
+    };
+
+    const result = copyEventFilter(event as NormalizedEvent);
+
+    expect(result).toBeFalsy();
+  });
+
   it('does not allow DRAG events when the target is not the workspace', () => {
     const event = {
       target: {
@@ -60,7 +73,6 @@ describe('copyEventFilter', () => {
 
   it('does not allow any events except DRAG and MOUSE_WHEEL regardless of the target', () => {
     const eventTypesToTest = [
-      MouseClickEventType.LEFT_CLICK,
       WindowEventType.RESIZE,
       KeyboardEventType.KEY_UP,
     ];

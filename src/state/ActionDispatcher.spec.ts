@@ -333,6 +333,25 @@ describe('ActionDispatcher', () => {
       expect(handleUpdateSelectionMarqueeSpy).toHaveBeenCalledWith(store, position);
     });
 
+    it('calls handleUpdateSelectionMarquee if type is WORKSPACE, mode is COPY, and workspace has no offset', () => {
+      const position: Position = { x: 200, y: 200 };
+      initialize({ x: 0, y: 0 }, 1, EditorMode.COPY);
+
+      const handleUpdateSelectionMarqueeSpy = jest.spyOn(EditorActionHandlers, 'handleUpdateSelectionMarquee');
+      const target = {
+        id,
+        type: WORKSPACE,
+      };
+      const event = {
+        position,
+        target,
+      };
+
+      observer.publish(DRAG, event);
+      expect(handleUpdateSelectionMarqueeSpy).toHaveBeenCalledTimes(1);
+      expect(handleUpdateSelectionMarqueeSpy).toHaveBeenCalledWith(store, position);
+    });
+
     it('calls handleUpdateSelectionMarquee if type is WORKSPACE, mode is SELECT, and workspace has offset', () => {
       const position: Position = { x: 200, y: 200 };
       initialize({ x: 200, y: 300 }, 1, EditorMode.SELECT);
@@ -357,9 +376,57 @@ describe('ActionDispatcher', () => {
       expect(handleUpdateSelectionMarqueeSpy).toHaveBeenCalledWith(store, normalizedPosition);
     });
 
+    it('calls handleUpdateSelectionMarquee if type is WORKSPACE, mode is COPY, and workspace has offset', () => {
+      const position: Position = { x: 200, y: 200 };
+      initialize({ x: 200, y: 300 }, 1, EditorMode.COPY);
+
+      const handleUpdateSelectionMarqueeSpy = jest.spyOn(EditorActionHandlers, 'handleUpdateSelectionMarquee');
+      const workspaceState = store.getState().workspace;
+      const normalizedPosition = {
+        x: (position.x - workspaceState.position.x) / workspaceState.scale,
+        y: (position.y - workspaceState.position.y) / workspaceState.scale,
+      };
+      const target = {
+        id,
+        type: WORKSPACE,
+      };
+      const event = {
+        position,
+        target,
+      };
+
+      observer.publish(DRAG, event);
+      expect(handleUpdateSelectionMarqueeSpy).toHaveBeenCalledTimes(1);
+      expect(handleUpdateSelectionMarqueeSpy).toHaveBeenCalledWith(store, normalizedPosition);
+    });
+
     it('calls handleUpdateSelectionMarquee if type is WORKSPACE, mode is SELECT, and workspace has scale', () => {
       const position: Position = { x: 200, y: 200 };
       initialize({ x: 200, y: 300 }, 2, EditorMode.SELECT);
+
+      const handleUpdateSelectionMarqueeSpy = jest.spyOn(EditorActionHandlers, 'handleUpdateSelectionMarquee');
+      const workspaceState = store.getState().workspace;
+      const normalizedPosition = {
+        x: (position.x - workspaceState.position.x) / workspaceState.scale,
+        y: (position.y - workspaceState.position.y) / workspaceState.scale,
+      };
+      const target = {
+        id,
+        type: WORKSPACE,
+      };
+      const event = {
+        position,
+        target,
+      };
+
+      observer.publish(DRAG, event);
+      expect(handleUpdateSelectionMarqueeSpy).toHaveBeenCalledTimes(1);
+      expect(handleUpdateSelectionMarqueeSpy).toHaveBeenCalledWith(store, normalizedPosition);
+    });
+
+    it('calls handleUpdateSelectionMarquee if type is WORKSPACE, mode is COPY, and workspace has scale', () => {
+      const position: Position = { x: 200, y: 200 };
+      initialize({ x: 200, y: 300 }, 2, EditorMode.COPY);
 
       const handleUpdateSelectionMarqueeSpy = jest.spyOn(EditorActionHandlers, 'handleUpdateSelectionMarquee');
       const workspaceState = store.getState().workspace;
@@ -449,6 +516,25 @@ describe('ActionDispatcher', () => {
     it('calls handleShowSelectionMarquee if type is DiagramMakerComponents.WORKSPACE and EditorMode is SELECT', () => {
       const position = { x: 200, y: 200 };
       initialize({ x: 0, y: 0 }, 1, EditorMode.SELECT);
+
+      const handleShowSelectionMarqueeSpy = jest.spyOn(EditorActionHandlers, 'handleShowSelectionMarquee');
+      const target = {
+        id,
+        type: WORKSPACE,
+      };
+      const event = {
+        position,
+        target,
+      };
+
+      observer.publish(DRAG_START, event);
+      expect(handleShowSelectionMarqueeSpy).toHaveBeenCalledTimes(1);
+      expect(handleShowSelectionMarqueeSpy).toHaveBeenCalledWith(store, position);
+    });
+
+    it('calls handleShowSelectionMarquee if type is DiagramMakerComponents.WORKSPACE and EditorMode is COPY', () => {
+      const position = { x: 200, y: 200 };
+      initialize({ x: 0, y: 0 }, 1, EditorMode.COPY);
 
       const handleShowSelectionMarqueeSpy = jest.spyOn(EditorActionHandlers, 'handleShowSelectionMarquee');
       const target = {
@@ -573,6 +659,25 @@ describe('ActionDispatcher', () => {
     it('calls handleHideSelectionMarquee if type is WORKSPACE and EditorMode is SELECT', () => {
       const position = { x: 200, y: 200 };
       initialize({ x: 0, y: 0 }, 1, EditorMode.SELECT);
+
+      const handleHideSelectionMarqueeSpy = jest.spyOn(EditorActionHandlers, 'handleHideSelectionMarquee');
+      const target = {
+        id,
+        type: WORKSPACE,
+      };
+      const event = {
+        position,
+        target,
+      };
+
+      observer.publish(DRAG_END, event);
+      expect(handleHideSelectionMarqueeSpy).toHaveBeenCalledTimes(1);
+      expect(handleHideSelectionMarqueeSpy).toHaveBeenCalledWith(store);
+    });
+
+    it('calls handleHideSelectionMarquee if type is WORKSPACE and EditorMode is COPY', () => {
+      const position = { x: 200, y: 200 };
+      initialize({ x: 0, y: 0 }, 1, EditorMode.COPY);
 
       const handleHideSelectionMarqueeSpy = jest.spyOn(EditorActionHandlers, 'handleHideSelectionMarquee');
       const target = {
