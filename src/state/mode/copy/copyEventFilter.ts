@@ -2,13 +2,12 @@ import {
   ContainerEventType,
   DragEventType,
   MouseClickEventType,
-  WheelEventType
+  WheelEventType,
 } from 'diagramMaker/service/ui/UIEventManager';
 import { NormalizedDragEvent, NormalizedEvent } from 'diagramMaker/service/ui/UIEventNormalizer';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 
 const { WORKSPACE } = DiagramMakerComponentsType;
-
 
 export default function copyEventFilter(event: NormalizedEvent): boolean {
   const { type } = event;

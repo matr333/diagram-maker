@@ -55,7 +55,7 @@ import {
   handlePotentialNodeDragEnd,
   handlePotentialNodeDragStart,
 } from 'diagramMaker/state/node/nodeActionDispatcher';
-import { handlePanelDrag, handlePanelDragStart, } from 'diagramMaker/state/panel/panelActionDispatcher';
+import { handlePanelDrag, handlePanelDragStart } from 'diagramMaker/state/panel/panelActionDispatcher';
 
 import {
   DiagramMakerData,

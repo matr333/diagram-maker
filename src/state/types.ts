@@ -30,7 +30,7 @@ export enum EditorModeType {
   /**
    *
    */
-  COPY = 'Copy'
+  COPY = 'Copy',
 }
 
 export const EditorMode = {

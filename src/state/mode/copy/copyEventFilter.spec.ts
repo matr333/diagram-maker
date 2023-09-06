@@ -3,7 +3,6 @@ import {
   ContainerEventType,
   DragEventType,
   KeyboardEventType,
-  MouseClickEventType,
   WheelEventType,
   WindowEventType,
 } from 'diagramMaker/service/ui/UIEventManager';
