@@ -55,13 +55,14 @@ import {
   handlePotentialNodeDragEnd,
   handlePotentialNodeDragStart,
 } from 'diagramMaker/state/node/nodeActionDispatcher';
-import {
-  handlePanelDrag,
-  handlePanelDragStart,
-} from 'diagramMaker/state/panel/panelActionDispatcher';
+import { handlePanelDrag, handlePanelDragStart, } from 'diagramMaker/state/panel/panelActionDispatcher';
 
 import {
-  DiagramMakerData, DiagramMakerWorkspace, EditorMode, Position,
+  DiagramMakerData,
+  DiagramMakerWorkspace,
+  EditorMode,
+  EditorModeType,
+  Position,
 } from 'diagramMaker/state/types';
 import {
   handleSelectAll,
@@ -222,6 +223,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
         break;
       case DiagramMakerComponentsType.WORKSPACE:
         switch (editorMode) {
+          case EditorMode.COPY:
           case EditorMode.SELECT:
             handleUpdateSelectionMarquee(
               this.store,
@@ -259,7 +261,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
     const workspaceState = this.store.getState().workspace;
     switch (type) {
       case DiagramMakerComponentsType.WORKSPACE:
-        if (editorMode === EditorMode.SELECT) {
+        if (editorMode === EditorMode.SELECT || editorMode === EditorModeType.COPY) {
           handleShowSelectionMarquee(
             this.store,
             ActionDispatcher.getNormalizedPositionOffsetInWorkspace(position, workspaceState),
@@ -313,7 +315,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
 
     switch (type) {
       case DiagramMakerComponentsType.WORKSPACE:
-        if (editorMode === EditorMode.SELECT) {
+        if (editorMode === EditorMode.SELECT || editorMode === EditorModeType.COPY) {
           handleHideSelectionMarquee(this.store);
         }
         break;

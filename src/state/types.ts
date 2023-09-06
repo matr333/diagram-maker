@@ -27,6 +27,10 @@ export enum EditorModeType {
    * Allows selection of multiple nodes with a rectangular marquee.
    */
   SELECT = 'Select',
+  /**
+   *
+   */
+  COPY = 'Copy'
 }
 
 export const EditorMode = {
