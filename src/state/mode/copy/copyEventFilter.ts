@@ -8,7 +8,7 @@ import {
 import {
   NormalizedDragEvent,
   NormalizedEvent,
-  NormalizedKeyboardEvent
+  NormalizedKeyboardEvent,
 } from 'diagramMaker/service/ui/UIEventNormalizer';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
 
@@ -22,9 +22,10 @@ export default function copyEventFilter(event: NormalizedEvent): boolean {
     case MouseClickEventType.MOUSE_DOWN:
     case WheelEventType.MOUSE_WHEEL:
       return true;
-    case KeyboardEventType.KEY_DOWN:
+    case KeyboardEventType.KEY_DOWN: {
       const { key } = event as NormalizedKeyboardEvent;
       return key === 'Control' || key === 'c';
+    }
     case DragEventType.DRAG_START:
     case DragEventType.DRAG_END:
     case DragEventType.DRAG: {

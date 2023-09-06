@@ -47,7 +47,7 @@ describe('copyEventFilter', () => {
   it('allows KEY_DOWN events', () => {
     const event = {
       type: KeyboardEventType.KEY_DOWN,
-      key: 'c'
+      key: 'c',
     };
 
     const result = copyEventFilter(event as NormalizedEvent);
