@@ -64,6 +64,12 @@ export default function nodeReducer<NodeType, EdgeType>(
         delete draftState[action.payload.id];
       });
     case EditorActionsType.FOCUS_NODE:
+      if (action.payload.select) {
+        return produce(state, (draftState) => {
+          draftState[action.payload.id].diagramMakerData.selected = true;
+        });
+      }
+      return state;
     case NodeActionsType.NODE_SELECT:
       return produce(state, (draftState) => {
         draftState[action.payload.id].diagramMakerData.selected = true;

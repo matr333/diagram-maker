@@ -78,11 +78,12 @@ export function createFocusNodeAction(
   size: Size,
   leftPanelWidth?: number,
   rightPanelWidth?: number,
+  select?: boolean,
 ): FocusNodeAction {
   return {
     type: EditorActionsType.FOCUS_NODE,
     payload: {
-      id, position, size, leftPanelWidth, rightPanelWidth,
+      id, position, size, leftPanelWidth, rightPanelWidth, select,
     },
   };
 }

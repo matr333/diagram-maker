@@ -108,7 +108,7 @@ describe('DiagramMakerApi', () => {
       const result = api.focusNode(testId);
       expect(result).toBe(api);
       expect(createFocusNodeAction).toHaveBeenCalledTimes(1);
-      expect(createFocusNodeAction).toHaveBeenCalledWith(testId, position, size, undefined, undefined);
+      expect(createFocusNodeAction).toHaveBeenCalledWith(testId, position, size, undefined, undefined, true);
       expect(store.dispatch).toHaveBeenCalledTimes(1);
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });
@@ -138,7 +138,7 @@ describe('DiagramMakerApi', () => {
       const result = api.focusNode(testId, leftPanelWidth, rightPanelWidth);
       expect(result).toBe(api);
       expect(createFocusNodeAction).toHaveBeenCalledTimes(1);
-      expect(createFocusNodeAction).toHaveBeenCalledWith(testId, position, size, leftPanelWidth, rightPanelWidth);
+      expect(createFocusNodeAction).toHaveBeenCalledWith(testId, position, size, leftPanelWidth, rightPanelWidth, true);
       expect(store.dispatch).toHaveBeenCalledTimes(1);
       expect(store.dispatch).toHaveBeenCalledWith(action);
     });

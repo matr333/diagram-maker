@@ -184,7 +184,9 @@ describe('nodeReducer', () => {
       const state = getState();
       const action: FocusNodeAction = {
         type: EditorActionsType.FOCUS_NODE,
-        payload: { id: 'node-1', position: { x: 10, y: 10 }, size: { width: 10, height: 10 } },
+        payload: {
+          id: 'node-1', position: { x: 10, y: 10 }, size: { width: 10, height: 10 }, select: true,
+        },
       };
       const expectedState = getState();
       set(expectedState, 'node-1.diagramMakerData.selected', true);

@@ -100,6 +100,8 @@ export interface FocusNodeAction extends Action {
     leftPanelWidth?: number;
     /** Width of fixed right panel */
     rightPanelWidth?: number;
+    /** Select focused node */
+    select?: boolean
   };
 }
 

@@ -53,17 +53,19 @@ export default class DiagramMakerApi<NodeType = {}, EdgeType = {}> {
    * @param {string} nodeId - ID of the node to focus
    * @param {number} [leftPanelWidth] - Width of the fixed left panel
    * @param {number} [rightPanelWidth] - Width of the fixed right panel
+   * @param {boolean} [select] - Select focused node
    * @returns {DiagramMakerApi} - Returns this `DiagramMakerApi` instance for method chaining.
    */
   public focusNode(
     nodeId: string,
     leftPanelWidth?: number,
     rightPanelWidth?: number,
+    select: boolean = true,
   ): DiagramMakerApi<NodeType, EdgeType> {
     const nodeState = this.store.getState().nodes[nodeId];
     if (nodeState) {
       const { position, size } = nodeState.diagramMakerData;
-      this.store.dispatch(createFocusNodeAction(nodeId, position, size, leftPanelWidth, rightPanelWidth));
+      this.store.dispatch(createFocusNodeAction(nodeId, position, size, leftPanelWidth, rightPanelWidth, select));
     }
     return this;
   }
