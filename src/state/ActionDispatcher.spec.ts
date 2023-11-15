@@ -63,6 +63,7 @@ const {
 let observer: Observer;
 let store: MockStore;
 let config: ConfigService<{}, {}>;
+let actionDispatcher: ActionDispatcher<{}, {}>;
 
 const getMockStore = (workspace: DiagramMakerWorkspace, editor: DiagramMakerEditor, nodes = {}, edges = {}) => ({
   dispatch: jest.fn(),
@@ -91,7 +92,7 @@ const initialize = (
   store = getMockStore({
     position, scale, canvasSize, viewContainerSize,
   }, { contextMenu, mode });
-  new ActionDispatcher(observer, store as Store, config);
+  actionDispatcher = new ActionDispatcher(observer, store as Store, config);
 };
 
 describe('ActionDispatcher', () => {
@@ -921,7 +922,7 @@ describe('ActionDispatcher', () => {
   describe('handleKeyDown', () => {
     it('calls handleSelectAll if key is "a" and OS modifier key is pressed', () => {
       const event = {
-        key: 'a',
+        code: 'KeyA',
         modKey: true,
       };
       const handleSelectAllSpy = jest.spyOn(WorkspaceActionHandlers, 'handleSelectAll');
@@ -934,7 +935,7 @@ describe('ActionDispatcher', () => {
 
     it('calls handleDeleteSelectedItems if key is KeyboardCode.DELETE', () => {
       const event = {
-        key: KeyboardCode.DELETE,
+        code: KeyboardCode.DELETE,
       };
       const handleDeleteSelectedItemsSpy = jest.spyOn(GlobalActionHandlers, 'handleDeleteSelectedItems');
 
@@ -945,15 +946,45 @@ describe('ActionDispatcher', () => {
     });
 
     it('calls handleDeleteSelectedItems if key is KeyboardCode.BACKSPACE', () => {
-      const key = KeyboardCode.BACKSPACE;
-      const originalEvent = new KeyboardEvent('keydown', { key });
-      const event = { key, originalEvent };
+      const code = KeyboardCode.BACKSPACE;
+      const originalEvent = new KeyboardEvent('keydown', { code });
+      const event = { code, originalEvent };
       const handleDeleteSelectedItemsSpy = jest.spyOn(GlobalActionHandlers, 'handleDeleteSelectedItems');
 
       observer.publish(KEY_DOWN, event);
 
       expect(handleDeleteSelectedItemsSpy).toHaveBeenCalledTimes(1);
       expect(handleDeleteSelectedItemsSpy).toHaveBeenCalledWith(store);
+    });
+
+    it('calls handleCtrlZ if key is KeyboardCode.Z with no shift', () => {
+      const code = KeyboardCode.Z;
+      const originalEvent = new KeyboardEvent('keydown', { code, ctrlKey: true, shiftKey: false });
+      const event = {
+        code, modKey: true, shiftKey: false, originalEvent,
+      };
+      const handleCtrlZSpy = jest.fn();
+      (actionDispatcher as any).handleCtrlZ = handleCtrlZSpy;
+
+      observer.publish(KEY_DOWN, event);
+
+      expect(handleCtrlZSpy).toHaveBeenCalledTimes(1);
+      expect(handleCtrlZSpy).toHaveBeenCalledWith(event);
+    });
+
+    it('calls handleCtrlShiftZ if key is KeyboardCode.Z with shift', () => {
+      const code = KeyboardCode.Z;
+      const originalEvent = new KeyboardEvent('keydown', { code, ctrlKey: true, shiftKey: true });
+      const event = {
+        code, modKey: true, shiftKey: true, originalEvent,
+      };
+      const handleCtrlShiftZSpy = jest.fn();
+      (actionDispatcher as any).handleCtrlShiftZ = handleCtrlShiftZSpy;
+
+      observer.publish(KEY_DOWN, event);
+
+      expect(handleCtrlShiftZSpy).toHaveBeenCalledTimes(1);
+      expect(handleCtrlShiftZSpy).toHaveBeenCalledWith(event);
     });
   });
 

@@ -193,6 +193,18 @@ describe('nodeReducer', () => {
       expect(nodeReducer(state, action)).toEqual(expectedState);
       checkReducerPurity(state);
     });
+
+    it('ignores action if select is false', () => {
+      const state = getState();
+      const action: FocusNodeAction = {
+        type: EditorActionsType.FOCUS_NODE,
+        payload: {
+          id: 'node-1', position: { x: 10, y: 10 }, size: { width: 10, height: 10 }, select: false,
+        },
+      };
+      expect(nodeReducer(state, action)).toEqual(state);
+      checkReducerPurity(state);
+    });
   });
 
   describe('drag end node action', () => {

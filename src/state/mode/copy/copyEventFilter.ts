@@ -23,8 +23,8 @@ export default function copyEventFilter(event: NormalizedEvent): boolean {
     case WheelEventType.MOUSE_WHEEL:
       return true;
     case KeyboardEventType.KEY_DOWN: {
-      const { key } = event as NormalizedKeyboardEvent;
-      return key === 'Control' || key === 'c';
+      const { key, code } = event as NormalizedKeyboardEvent;
+      return key === 'Control' || code === 'KeyC';
     }
     case DragEventType.DRAG_START:
     case DragEventType.DRAG_END:

@@ -33,14 +33,10 @@ export enum MouseButton {
 export enum KeyboardCode {
   DELETE = 'Delete',
   BACKSPACE = 'Backspace',
-}
-
-export enum KeyboardKey {
-  A = 'a',
-  C = 'c',
-  V = 'v',
-  Z = 'z',
-  Z_CAP = 'Z',
+  A = 'KeyA',
+  C = 'KeyC',
+  V = 'KeyV',
+  Z = 'KeyZ',
 }
 
 export enum EventAttribute {

@@ -16,7 +16,6 @@ import {
 } from 'diagramMaker/service/ui/UIEventManager';
 import {
   KeyboardCode,
-  KeyboardKey,
   NormalizedContainerEvent,
   NormalizedDragEvent,
   NormalizedDropEvent,
@@ -420,31 +419,29 @@ export default class ActionDispatcher<NodeType, EdgeType> {
   // we were doing something like duplicating a node via keypress.
 
   private handleKeyDown = async (event: NormalizedKeyboardEvent): Promise<any> => {
-    const { key, modKey } = event;
-
-    switch (key) {
-      case KeyboardKey.A:
+    const {
+      modKey, code, shiftKey,
+    } = event;
+    switch (code) {
+      case KeyboardCode.A:
         if (modKey) {
           handleSelectAll(this.store);
         }
         break;
-      case KeyboardKey.C:
+      case KeyboardCode.C:
         if (modKey) {
           this.config.onCopyHandler();
         }
         break;
-      case KeyboardKey.V:
+      case KeyboardCode.V:
         if (modKey) {
           this.config.onPasteHandler();
         }
         break;
-      case KeyboardKey.Z:
-        if (modKey) {
+      case KeyboardCode.Z:
+        if (modKey && !shiftKey) {
           this.handleCtrlZ(event);
-        }
-        break;
-      case KeyboardKey.Z_CAP:
-        if (modKey) {
+        } else if (modKey && shiftKey) {
           this.handleCtrlShiftZ(event);
         }
         break;
