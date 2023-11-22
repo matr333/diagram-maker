@@ -38,7 +38,7 @@ export interface CreateNodeAction<NodeType> extends Action {
 }
 
 /** Action fired when a new potential node starts being dragged */
-export interface DragStartPotentialNodeAction extends Action {
+export interface DragStartPotentialNodeAction<NodeType> extends Action {
   type: NodeActionsType.POTENTIAL_NODE_DRAG_START;
   payload: {
     /**
@@ -49,7 +49,9 @@ export interface DragStartPotentialNodeAction extends Action {
     /** Current position of the potential node */
     position: Position,
     /** Size for the node that will be created if this is dropped on the workspace. */
-    size: Size
+    size: Size,
+    /** Consumer data that needs to be added for the newly created node. */
+    consumerData?: NodeType
   };
 }
 
@@ -136,5 +138,5 @@ export interface DragNodeAction extends Action {
 
 export type NodeAction<NodeType> =
   SelectNodeAction | DeleteNodeAction | DragStartNodeAction | DragEndNodeAction | DragNodeAction |
-  DragPotentialNodeAction | DragStartPotentialNodeAction | DragEndPotentialNodeAction | CreateNodeAction<NodeType> |
+  DragPotentialNodeAction | DragStartPotentialNodeAction<NodeType> | DragEndPotentialNodeAction | CreateNodeAction<NodeType> |
   DeselectNodeAction;

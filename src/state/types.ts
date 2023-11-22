@@ -152,13 +152,15 @@ export interface DiagramMakerNodes<NodeType> {
 }
 
 /** Interface for storing state of diagram maker potential node i.e. a new node being dragged onto the workspace */
-export interface DiagramMakerPotentialNode {
+export interface DiagramMakerPotentialNode<NodeType> {
   /** Type of the node. Mandatory for providing context during node creation */
   readonly typeId: string;
   /** Current position of the potential node w.r.t the workspace */
   readonly position: Position;
   /** Size of the potential node as detected via tha data attrs on the drag target or via the type config */
   readonly size: Size;
+  /** Contains data managed by the consumer */
+  readonly consumerData?: NodeType;
 }
 
 /**
@@ -340,7 +342,7 @@ export interface DiagramMakerData<NodeType, EdgeType> {
   /** Current state for diagram maker potential node if one needs to be rendered currently */
   readonly potentialEdge?: DiagramMakerPotentialEdge | null;
   /** Current state for diagram maker potential edge if one needs to be rendered currently */
-  readonly potentialNode?: DiagramMakerPotentialNode | null;
+  readonly potentialNode?: DiagramMakerPotentialNode<NodeType> | null;
   /** Current state for diagram maker editor */
   readonly editor: DiagramMakerEditor;
   /** History of undoable actions */

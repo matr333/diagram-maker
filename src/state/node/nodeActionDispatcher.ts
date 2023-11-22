@@ -72,14 +72,15 @@ function createDragNodeAction(
   };
 }
 
-function createPotentialNodeDragStartAction(
+function createPotentialNodeDragStartAction<NodeType>(
   typeId: string,
   position: Position,
   size: Size,
-): DragStartPotentialNodeAction {
+  consumerData?: NodeType
+): DragStartPotentialNodeAction<NodeType> {
   return {
     type: NodeActionsType.POTENTIAL_NODE_DRAG_START,
-    payload: { typeId, position, size },
+    payload: { typeId, position, size, consumerData },
   };
 }
 
@@ -246,7 +247,7 @@ export function handleNodeCreate<NodeType, EdgeType>(
     const state = store.getState();
     const { potentialNode } = state;
     if (potentialNode) {
-      const { position, size } = potentialNode;
+      const { position, size, consumerData } = potentialNode;
       const action = createNewNodeAction(id, typeId, position, size);
       store.dispatch(action);
     }

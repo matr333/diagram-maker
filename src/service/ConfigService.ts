@@ -196,7 +196,7 @@ interface RenderCallbacks<NodeType, EdgeType> {
    * or undefined or void everywhere else.
    */
   potentialNode?: (
-    node: DiagramMakerPotentialNode,
+    node: DiagramMakerPotentialNode<NodeType>,
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
   ) => (HTMLElement | undefined | void);
@@ -376,7 +376,7 @@ export default class ConfigService<NodeType, EdgeType> {
   ) => (HTMLElement | undefined | void) => this.getRenderCallbacks().panels[name];
 
   public getRenderPotentialNode = (): ((
-    node: DiagramMakerPotentialNode,
+    node: DiagramMakerPotentialNode<NodeType>,
     diagramMakerContainer: HTMLElement,
     consumerContainer?: HTMLElement | void
   ) => (HTMLElement | undefined | void)) | undefined => this.getRenderCallbacks().potentialNode;
