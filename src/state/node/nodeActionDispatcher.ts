@@ -208,7 +208,9 @@ export function handlePotentialNodeDragStart<NodeType, EdgeType>(
     const size = getSizeFromDataAttrs(target) || config.getSizeForNodeType(typeId);
     const consumerData = target.originalTarget.getAttribute('data-consumer-data');
     if (size) {
-      const action = createPotentialNodeDragStartAction(typeId, getCenteredPosition(position, size), size, consumerData);
+      const action = createPotentialNodeDragStartAction(
+        typeId, getCenteredPosition(position, size), size, consumerData
+      );
       store.dispatch(action);
     }
   }
