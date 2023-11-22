@@ -458,7 +458,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     }
 
     const {
-      typeId, position, size, consumerData
+      typeId, position, size, consumerData,
     } = node;
 
     return (
