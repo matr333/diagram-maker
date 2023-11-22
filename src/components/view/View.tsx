@@ -457,7 +457,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
       return undefined;
     }
 
-    const { typeId, position, size } = node;
+    const { typeId, position, size, consumerData } = node;
 
     return (
       <PotentialNode
@@ -467,6 +467,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
         size={size}
         renderCallback={renderCallback.bind(null, node)}
         destroyCallback={destroyCallback}
+        consumerData={consumerData}
       />
     );
   }
