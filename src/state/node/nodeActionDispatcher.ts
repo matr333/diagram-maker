@@ -115,7 +115,7 @@ function createNewNodeAction<NodeType>(
   return {
     type: NodeActionsType.NODE_CREATE,
     payload: {
-      id, typeId, position, size, consumerData
+      id, typeId, position, size, consumerData,
     },
   };
 }

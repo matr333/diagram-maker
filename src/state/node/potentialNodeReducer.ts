@@ -20,7 +20,7 @@ export default function potentialNodeReducer<NodeType, EdgeType>(
         position: action.payload.position,
         size: action.payload.size,
         typeId: action.payload.typeId,
-        consumerData: action.payload.consumerData
+        consumerData: action.payload.consumerData,
       };
     case (NodeActionsType.POTENTIAL_NODE_DRAG):
       return produce(state, (draftState) => {

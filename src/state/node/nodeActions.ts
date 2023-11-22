@@ -138,5 +138,5 @@ export interface DragNodeAction extends Action {
 
 export type NodeAction<NodeType> =
   SelectNodeAction | DeleteNodeAction | DragStartNodeAction | DragEndNodeAction | DragNodeAction |
-  DragPotentialNodeAction | DragStartPotentialNodeAction<NodeType> | DragEndPotentialNodeAction | CreateNodeAction<NodeType> |
-  DeselectNodeAction;
+  DragPotentialNodeAction | DragStartPotentialNodeAction<NodeType> | DragEndPotentialNodeAction |
+  CreateNodeAction<NodeType> | DeselectNodeAction;
