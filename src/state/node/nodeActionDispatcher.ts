@@ -72,16 +72,16 @@ function createDragNodeAction(
   };
 }
 
-function createPotentialNodeDragStartAction<NodeType>(
+function createPotentialNodeDragStartAction(
   typeId: string,
   position: Position,
   size: Size,
-  consumerData?: NodeType,
-): DragStartPotentialNodeAction<NodeType> {
+  title?: string,
+): DragStartPotentialNodeAction {
   return {
     type: NodeActionsType.POTENTIAL_NODE_DRAG_START,
     payload: {
-      typeId, position, size, consumerData,
+      typeId, position, size, title,
     },
   };
 }
@@ -206,10 +206,10 @@ export function handlePotentialNodeDragStart<NodeType, EdgeType>(
   const typeId = target.id;
   if (typeId) {
     const size = getSizeFromDataAttrs(target) || config.getSizeForNodeType(typeId);
-    const consumerData = target.originalTarget.getAttribute('data-consumer-data');
+    const title = target.originalTarget.getAttribute('data-title') || undefined;
     if (size) {
       const centeredPosition = getCenteredPosition(position, size);
-      const action = createPotentialNodeDragStartAction(typeId, centeredPosition, size, consumerData);
+      const action = createPotentialNodeDragStartAction(typeId, centeredPosition, size, title);
       store.dispatch(action);
     }
   }
@@ -252,8 +252,8 @@ export function handleNodeCreate<NodeType, EdgeType>(
     const state = store.getState();
     const { potentialNode } = state;
     if (potentialNode) {
-      const { position, size, consumerData } = potentialNode;
-      const action = createNewNodeAction(id, typeId, position, size, consumerData);
+      const { position, size, title } = potentialNode;
+      const action = createNewNodeAction(id, typeId, position, size, { title });
       store.dispatch(action);
     }
   }

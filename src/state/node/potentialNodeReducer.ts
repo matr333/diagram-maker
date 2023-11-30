@@ -8,9 +8,9 @@ import { MARGIN_PX } from './nodeActionDispatcher';
 import { NodeActionsType } from './nodeActions';
 
 export default function potentialNodeReducer<NodeType, EdgeType>(
-  state: DiagramMakerPotentialNode<NodeType> | null | undefined,
+  state: DiagramMakerPotentialNode | null | undefined,
   action: DiagramMakerAction<NodeType, EdgeType>,
-): DiagramMakerPotentialNode<NodeType> | null {
+): DiagramMakerPotentialNode | null {
   if (state === undefined) {
     return null;
   }
@@ -20,7 +20,7 @@ export default function potentialNodeReducer<NodeType, EdgeType>(
         position: action.payload.position,
         size: action.payload.size,
         typeId: action.payload.typeId,
-        consumerData: action.payload.consumerData,
+        title: action.payload.title,
       };
     case (NodeActionsType.POTENTIAL_NODE_DRAG):
       return produce(state, (draftState) => {

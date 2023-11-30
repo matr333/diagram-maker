@@ -9,7 +9,7 @@ import {
 import potentialNodeReducer from './potentialNodeReducer';
 
 describe('potentialNodeReducer', () => {
-  const getState = (): DiagramMakerPotentialNode<{}> => ({
+  const getState = (): DiagramMakerPotentialNode => ({
     typeId: 'node-1',
     position: { x: 0, y: 0 },
     size: { width: 200, height: 200 },
@@ -25,7 +25,7 @@ describe('potentialNodeReducer', () => {
     },
   };
 
-  function checkReducerPurity(state: DiagramMakerPotentialNode<{}>) {
+  function checkReducerPurity(state: DiagramMakerPotentialNode) {
     expect(state).toEqual(getState());
   }
 
@@ -50,7 +50,7 @@ describe('potentialNodeReducer', () => {
       const typeId = 'node-1';
       const position = { x: 0, y: 0 };
       const size = { width: 200, height: 200 };
-      const action: DragStartPotentialNodeAction<{}> = {
+      const action: DragStartPotentialNodeAction = {
         type: NodeActionsType.POTENTIAL_NODE_DRAG_START, payload: { typeId, position, size },
       };
       const expectedState = getState();

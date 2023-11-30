@@ -11,7 +11,7 @@ export function createDivWithText(text: string) {
   return newDiv;
 }
 
-export function createPotentialNode(node: DiagramMakerPotentialNode<{}>, container: HTMLElement) {
+export function createPotentialNode(node: DiagramMakerPotentialNode, container: HTMLElement) {
   const id = node.typeId;
   const newDiv = createDivWithText(id);
   newDiv.classList.add('rectangle', 'example-node');

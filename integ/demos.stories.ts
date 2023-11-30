@@ -119,7 +119,7 @@ const Template = ({
           return undefined;
         } : undefined,
         potentialNode:
-          (node: DiagramMakerPotentialNode<{}>, container: HTMLElement) => createPotentialNode(node, container),
+          (node: DiagramMakerPotentialNode, container: HTMLElement) => createPotentialNode(node, container),
         connector: (connector: DiagramMakerConnector, container: HTMLElement) => {
           const div = createDivWithText(connector.id);
           container.appendChild(div);

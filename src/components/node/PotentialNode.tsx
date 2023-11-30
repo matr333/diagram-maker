@@ -7,19 +7,19 @@ import { Position, Size } from 'diagramMaker/state/types';
 
 import './Node.scss';
 
-export interface PotentialNodeProps<NodeType> {
+export interface PotentialNodeProps {
   typeId: string;
   position: Position;
   size: Size;
   renderCallback: BoundRenderCallback;
   destroyCallback: DestroyCallback;
-  consumerData?: NodeType;
+  title?: string;
 }
 
-export default class PotentialNode<NodeType> extends Preact.Component<PotentialNodeProps<NodeType>, {}> {
+export default class PotentialNode extends Preact.Component<PotentialNodeProps, {}> {
   public render(): JSX.Element {
     const {
-      typeId, position, renderCallback, destroyCallback, size, consumerData,
+      typeId, position, renderCallback, destroyCallback, size, title,
     } = this.props;
     const { x, y } = position;
     const { width, height } = size;
@@ -32,7 +32,7 @@ export default class PotentialNode<NodeType> extends Preact.Component<PotentialN
         data-id={typeId}
         data-type={DiagramMakerComponentsType.POTENTIAL_NODE}
         data-event-target
-        data-consumer-data={consumerData}
+        data-title={title}
       >
         <ComposeView
           renderCallback={renderCallback}
