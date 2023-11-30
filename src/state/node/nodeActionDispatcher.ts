@@ -253,7 +253,8 @@ export function handleNodeCreate<NodeType, EdgeType>(
     const { potentialNode } = state;
     if (potentialNode) {
       const { position, size, title } = potentialNode;
-      const action = createNewNodeAction(id, typeId, position, size, { title });
+      const consumerData = title ? { title } : undefined;
+      const action = createNewNodeAction(id, typeId, position, size, consumerData);
       store.dispatch(action);
     }
   }
