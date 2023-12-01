@@ -47,7 +47,8 @@ describe('workflowLayout', () => {
     const layoutConfig: WorkflowLayoutConfig = {
       layoutType: LayoutType.WORKFLOW,
       direction: WorkflowLayoutDirection.LEFT_RIGHT,
-      distanceMin: 123,
+      distanceMinY: 123,
+      distanceMinX: 123,
     };
 
     let edgeLabelFn = null;
@@ -58,9 +59,9 @@ describe('workflowLayout', () => {
     expect(Dagre.graphlib.Graph).toBeCalledTimes(1);
     expect(dagreGraphMock.setGraph).toBeCalledTimes(1);
     expect(dagreGraphMock.setGraph).toBeCalledWith({
-      nodesep: layoutConfig.distanceMin,
+      nodesep: layoutConfig.distanceMinX,
       rankdir: 'LR',
-      ranksep: layoutConfig.distanceMin,
+      ranksep: layoutConfig.distanceMinY,
     });
 
     // Edge label function should assign empty objects to all edges.
@@ -94,7 +95,8 @@ describe('workflowLayout', () => {
     const layoutConfig: WorkflowLayoutConfig = {
       layoutType: LayoutType.WORKFLOW,
       direction: WorkflowLayoutDirection.TOP_BOTTOM,
-      distanceMin: 50,
+      distanceMinX: 50,
+      distanceMinY: 50,
     };
 
     asMock(dagreGraphMock.nodes).mockImplementationOnce(() => keys(graph.nodes));
@@ -141,7 +143,8 @@ describe('workflowLayout', () => {
     const layoutConfig: WorkflowLayoutConfig = {
       layoutType: LayoutType.WORKFLOW,
       direction: WorkflowLayoutDirection.RIGHT_LEFT,
-      distanceMin: 30,
+      distanceMinY: 30,
+      distanceMinX: 30,
       fixedNodeId: 'node-b',
     };
 

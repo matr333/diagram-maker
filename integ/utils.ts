@@ -307,7 +307,8 @@ function createWorkflowLayoutButton(getDiagramMakerObj: () => DiagramMaker) {
   return createToolButton('WorkflowLayout', () => {
     getDiagramMakerObj().api.layout({
       direction: WorkflowLayoutDirection.LEFT_RIGHT,
-      distanceMin: 200,
+      distanceMinX: 200,
+      distanceMinY: 200,
       layoutType: Layout.WORKFLOW,
     });
   });

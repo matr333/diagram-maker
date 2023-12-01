@@ -94,9 +94,14 @@ export interface WorkflowLayoutConfig {
   direction: WorkflowLayoutDirectionType;
 
   /**
-   * Minimal distance between two nodes.
+   * Minimal distance between two nodes by X.
    */
-  distanceMin: number;
+  distanceMinX: number;
+
+  /**
+   * Minimal distance between two nodes by Y.
+   */
+  distanceMinY: number;
 
   /**
    * When provided, the position of `fixedNodeId` will remain the same after layout.

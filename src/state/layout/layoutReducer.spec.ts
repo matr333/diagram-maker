@@ -59,7 +59,8 @@ describe('layoutReducer', () => {
         const layoutConfig: WorkflowLayoutConfig = {
           layoutType: LayoutType.WORKFLOW,
           direction: WorkflowLayoutDirection.TOP_BOTTOM,
-          distanceMin: 123,
+          distanceMinX: 123,
+          distanceMinY: 123,
         };
         const action: LayoutAction = {
           type: LayoutActionsType.LAYOUT,
