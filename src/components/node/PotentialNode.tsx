@@ -32,7 +32,7 @@ export default class PotentialNode<NodeType> extends Preact.Component<PotentialN
         data-id={typeId}
         data-type={DiagramMakerComponentsType.POTENTIAL_NODE}
         data-event-target
-        data-consumer-data={consumerData}
+        data-consumer-data={JSON.stringify(consumerData)}
       >
         <ComposeView
           renderCallback={renderCallback}
