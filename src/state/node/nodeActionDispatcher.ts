@@ -81,7 +81,10 @@ function createPotentialNodeDragStartAction<NodeType>(
   return {
     type: NodeActionsType.POTENTIAL_NODE_DRAG_START,
     payload: {
-      typeId, position, size, consumerData,
+      typeId,
+      position,
+      size,
+      ...(consumerData ? {consumerData} : {}),
     },
   };
 }
