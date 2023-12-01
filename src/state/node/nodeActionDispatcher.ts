@@ -84,7 +84,7 @@ function createPotentialNodeDragStartAction<NodeType>(
       typeId,
       position,
       size,
-      ...(consumerData ? {consumerData} : {}),
+      ...(consumerData ? { consumerData } : {}),
     },
   };
 }
