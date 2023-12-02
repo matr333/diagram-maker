@@ -34,8 +34,8 @@ export default function workflowLayout<NodeType, EdgeType>(
   const dagreGraph = new Dagre.graphlib.Graph() as dagre.graphlib.Graph;
   dagreGraph.setGraph({
     rankdir: WORKFLOW_DIRECTION_TO_DAGRE_MAP[workflowConfig.direction],
-    nodesep: workflowConfig.distanceMinX,
-    ranksep: workflowConfig.distanceMinY,
+    nodesep: workflowConfig.distanceMinY,
+    ranksep: workflowConfig.distanceMinX,
   });
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
