@@ -32,7 +32,7 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
   public render(): JSX.Element {
     const {
       diagramMakerData,
-      id
+      id,
     } = this.props.diagramMakerNode;
     const { x, y } = diagramMakerData.position;
     const { width, height } = diagramMakerData.size;
@@ -64,7 +64,7 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
       return this.props.shouldUpdateCallback(this.props, nextProps);
     }
     return nextProps.diagramMakerNode !== this.props.diagramMakerNode;
-  }
+  };
 
   private getConnectors(): ConnectorProps[] {
     const { id, diagramMakerData } = this.props.diagramMakerNode;

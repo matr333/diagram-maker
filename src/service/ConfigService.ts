@@ -334,7 +334,6 @@ export interface DiagramMakerConfig<NodeType, EdgeType> {
    */
   renderCallbacks: RenderCallbacks<NodeType, EdgeType>;
 
-
   /**
    * Shoudl Component Update Callbacks for updating nodes,
    */
@@ -375,9 +374,7 @@ export default class ConfigService<NodeType, EdgeType> {
   public getShouldNodeUpdateCallback = (
     prevProps: NodeProps<NodeType>,
     nextProps: NodeProps<NodeType>,
-  ) => {
-    return this.config.shouldUpdateCallbacks?.node?.(prevProps, nextProps) ?? false;
-  }
+  ) => (this.config.shouldUpdateCallbacks?.node?.(prevProps, nextProps) ?? false);
 
   public getRenderNode = (): (
     node: DiagramMakerNode<NodeType>,
