@@ -51,6 +51,7 @@ exports[`View does not render edge when accomplying node(s) do not exist 1`] = `
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -75,6 +76,7 @@ exports[`View does not render edge when accomplying node(s) do not exist 1`] = `
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -177,6 +179,7 @@ exports[`View nodes with edge & a new edge drawing renders a new edge with cente
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -201,6 +204,7 @@ exports[`View nodes with edge & a new edge drawing renders a new edge with cente
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -321,6 +325,7 @@ exports[`View nodes with edge & a new edge drawing renders a new edge with defau
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -345,6 +350,7 @@ exports[`View nodes with edge & a new edge drawing renders a new edge with defau
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -465,6 +471,7 @@ exports[`View nodes with edge & a new edge drawing renders a new edge with left/
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="LeftRight"
@@ -489,6 +496,7 @@ exports[`View nodes with edge & a new edge drawing renders a new edge with left/
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -609,6 +617,7 @@ exports[`View nodes with edge & a new edge drawing renders a new edge with top/b
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="TopBottom"
@@ -633,6 +642,7 @@ exports[`View nodes with edge & a new edge drawing renders a new edge with top/b
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -753,6 +763,7 @@ exports[`View nodes with edge & a new node dragging doesnt render potential node
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -777,6 +788,7 @@ exports[`View nodes with edge & a new node dragging doesnt render potential node
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -879,6 +891,7 @@ exports[`View nodes with edge & a new node dragging renders a potential node whe
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -903,6 +916,7 @@ exports[`View nodes with edge & a new node dragging renders a potential node whe
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -1024,6 +1038,7 @@ exports[`View nodes with edge and context menu doesnt render if render context m
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="LeftRight"
@@ -1048,6 +1063,7 @@ exports[`View nodes with edge and context menu doesnt render if render context m
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -1150,6 +1166,7 @@ exports[`View nodes with edge and context menu renders context menu if render co
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -1174,6 +1191,7 @@ exports[`View nodes with edge and context menu renders context menu if render co
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -1289,6 +1307,7 @@ exports[`View nodes with edge nodes with types with connector placement override
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -1313,6 +1332,7 @@ exports[`View nodes with edge nodes with types with connector placement override
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -1417,6 +1437,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined def
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Boundary"
@@ -1441,6 +1462,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined def
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -1545,6 +1567,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Boundary"
@@ -1569,6 +1592,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -1733,6 +1757,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Boundary"
@@ -1757,6 +1782,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Boundary"
@@ -1781,6 +1807,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-3"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Boundary"
@@ -1805,6 +1832,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-4"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Boundary"
@@ -1829,6 +1857,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-5"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -1933,6 +1962,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Boundary"
@@ -1957,6 +1987,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -2061,6 +2092,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Boundary"
@@ -2085,6 +2117,7 @@ exports[`View nodes with edge nodes with types with shape & boundary defined ren
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -2189,6 +2222,7 @@ exports[`View nodes with edge nodes with types with visible connector types conf
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
         visibleConnectorTypes="Output"
       />
       <Node
@@ -2214,6 +2248,7 @@ exports[`View nodes with edge nodes with types with visible connector types conf
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -2332,6 +2367,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -2356,6 +2392,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -2458,6 +2495,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -2482,6 +2520,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -2584,6 +2623,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -2608,6 +2648,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -2728,6 +2769,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -2752,6 +2794,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -2854,6 +2897,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="LeftRight"
@@ -2878,6 +2922,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -2980,6 +3025,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="TopBottom"
@@ -3004,6 +3050,7 @@ exports[`View nodes with edge renders at the given position and size with nodes 
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -3162,6 +3209,7 @@ exports[`View nodes with overlapping edges renders two curved lines when an over
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -3186,6 +3234,7 @@ exports[`View nodes with overlapping edges renders two curved lines when an over
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -3269,6 +3318,7 @@ exports[`View renders selection marquee 1`] = `
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -3293,6 +3343,7 @@ exports[`View renders selection marquee 1`] = `
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
@@ -3391,6 +3442,7 @@ exports[`View renders two nodes without edges 1`] = `
         key="node_node-1"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <Node
         connectorPlacement="Centered"
@@ -3415,6 +3467,7 @@ exports[`View renders two nodes without edges 1`] = `
         key="node_node-2"
         renderCallback={[Function]}
         renderConnectorCallback={[Function]}
+        shouldUpdateCallback={[Function]}
       />
       <svg
         className="dm-potential-edge"
