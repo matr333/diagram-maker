@@ -425,7 +425,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     const renderCallback = this.props.configService.getRenderNode();
     const renderConnectorCallback = this.props.configService.getRenderConnector();
     const destroyCallback = this.props.configService.getRenderDestroy();
-    const shouldUpdateCallback = this.props.configService.getShouldNodeUpdateCallback;
+    const shouldUpdateCallback = this.props.configService.getShouldNodeUpdateCallback();
     const nodeKeys = Object.keys(nodes);
     return nodeKeys.map((nodeKey: string) => {
       const { typeId } = nodes[nodeKey];

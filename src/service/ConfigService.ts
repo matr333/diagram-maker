@@ -371,10 +371,7 @@ export default class ConfigService<NodeType, EdgeType> {
   constructor(private config: DiagramMakerConfig<NodeType, EdgeType>) {
   }
 
-  public getShouldNodeUpdateCallback = (
-    prevProps: NodeProps<NodeType>,
-    nextProps: NodeProps<NodeType>,
-  ) => (this.config.shouldUpdateCallbacks?.node?.(prevProps, nextProps) ?? false);
+  public getShouldNodeUpdateCallback = () => this.config.shouldUpdateCallbacks?.node;
 
   public getRenderNode = (): (
     node: DiagramMakerNode<NodeType>,
