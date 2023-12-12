@@ -11,6 +11,7 @@ import {
   Size,
 } from 'diagramMaker/state/types';
 import { noop } from 'lodash-es';
+import { NodeProps } from 'diagramMaker/components';
 
 export enum ConnectorPlacementType {
   /**
@@ -131,6 +132,15 @@ export interface ContextMenuRenderCallbacks {
    * @type {ContextMenuRenderCallback}
    */
   workspace?: ContextMenuRenderCallback;
+}
+
+export type ShouldUpdateNodeCallback<NodeType> = (
+  prevProps: NodeProps<NodeType>,
+  nextProps: NodeProps<NodeType>,
+) => boolean;
+
+interface ShouldUpdateCallbacks<NodeType> {
+  node?: ShouldUpdateNodeCallback<NodeType>;
 }
 
 /** Object containing callbacks for rendering & destroying various entities (like nodes, edges, panels, etc) */
@@ -323,6 +333,12 @@ export interface DiagramMakerConfig<NodeType, EdgeType> {
    * context menus, etc.
    */
   renderCallbacks: RenderCallbacks<NodeType, EdgeType>;
+
+
+  /**
+   * Shoudl Component Update Callbacks for updating nodes,
+   */
+  shouldUpdateCallbacks?: ShouldUpdateCallbacks<NodeType>;
   /**
    * Action interceptor. Before any action is dispatched to the store,
    * you may intercept and modify it or cancel it entirely.
@@ -354,6 +370,13 @@ export interface DiagramMakerConfig<NodeType, EdgeType> {
 }
 export default class ConfigService<NodeType, EdgeType> {
   constructor(private config: DiagramMakerConfig<NodeType, EdgeType>) {
+  }
+
+  public getShouldNodeUpdateCallback = (
+    prevProps: NodeProps<NodeType>,
+    nextProps: NodeProps<NodeType>,
+  ) => {
+    return this.config.shouldUpdateCallbacks?.node?.(prevProps, nextProps) ?? false;
   }
 
   public getRenderNode = (): (

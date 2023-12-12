@@ -8,11 +8,12 @@ import {
   ConnectorPlacementType,
   ConnectorRenderCallback,
   DestroyCallback,
+  ShouldUpdateNodeCallback,
   TypeForVisibleConnectorTypes,
   VisibleConnectorTypes,
 } from 'diagramMaker/service/ConfigService';
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
-import { DiagramMakerNode } from 'diagramMaker/state/types';
+import { DiagramMakerNode, DiagramMakerPlugins } from 'diagramMaker/state/types';
 
 import './Node.scss';
 
@@ -23,11 +24,16 @@ export interface NodeProps<NodeType> {
   destroyCallback: DestroyCallback;
   diagramMakerNode: DiagramMakerNode<NodeType>;
   visibleConnectorTypes?: TypeForVisibleConnectorTypes;
+  plugins?: DiagramMakerPlugins;
+  shouldUpdateCallback?: ShouldUpdateNodeCallback<NodeType>;
 }
 
 export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>, {}> {
   public render(): JSX.Element {
-    const { diagramMakerData, id } = this.props.diagramMakerNode;
+    const {
+      diagramMakerData,
+      id
+    } = this.props.diagramMakerNode;
     const { x, y } = diagramMakerData.position;
     const { width, height } = diagramMakerData.size;
     const transform = `translate3d(${x}px, ${y}px, 0)`;
@@ -53,7 +59,12 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
 
   public shouldComponentUpdate = (
     nextProps: NodeProps<NodeType>,
-  ) => nextProps.diagramMakerNode !== this.props.diagramMakerNode;
+  ) => {
+    if (this.props.shouldUpdateCallback) {
+      return this.props.shouldUpdateCallback(this.props, nextProps);
+    }
+    return nextProps.diagramMakerNode !== this.props.diagramMakerNode;
+  }
 
   private getConnectors(): ConnectorProps[] {
     const { id, diagramMakerData } = this.props.diagramMakerNode;
