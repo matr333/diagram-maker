@@ -17,14 +17,14 @@ import { DiagramMakerNode, DiagramMakerPlugins } from 'diagramMaker/state/types'
 
 import './Node.scss';
 
-export interface NodeProps<NodeType> {
+export interface NodeProps<NodeType, PluginsType = DiagramMakerPlugins> {
   connectorPlacement?: ConnectorPlacementType;
   renderCallback: BoundRenderCallback;
   renderConnectorCallback: ConnectorRenderCallback;
   destroyCallback: DestroyCallback;
   diagramMakerNode: DiagramMakerNode<NodeType>;
   visibleConnectorTypes?: TypeForVisibleConnectorTypes;
-  plugins?: DiagramMakerPlugins;
+  plugins?: PluginsType;
   shouldUpdateCallback?: ShouldUpdateNodeCallback<NodeType>;
 }
 

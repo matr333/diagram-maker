@@ -6,6 +6,7 @@ import {
   DiagramMakerEdge,
   DiagramMakerNode,
   DiagramMakerPanel,
+  DiagramMakerPlugins,
   DiagramMakerPotentialNode,
   Position,
   Size,
@@ -134,13 +135,13 @@ export interface ContextMenuRenderCallbacks {
   workspace?: ContextMenuRenderCallback;
 }
 
-export type ShouldUpdateNodeCallback<NodeType> = (
-  prevProps: NodeProps<NodeType>,
-  nextProps: NodeProps<NodeType>,
+export type ShouldUpdateNodeCallback<NodeType, PluginsType = DiagramMakerPlugins> = (
+  prevProps: NodeProps<NodeType, PluginsType>,
+  nextProps: NodeProps<NodeType, PluginsType>,
 ) => boolean;
 
-interface ShouldUpdateCallbacks<NodeType> {
-  node?: ShouldUpdateNodeCallback<NodeType>;
+interface ShouldUpdateCallbacks<NodeType, PluginsType = DiagramMakerPlugins> {
+  node?: ShouldUpdateNodeCallback<NodeType, PluginsType>;
 }
 
 /** Object containing callbacks for rendering & destroying various entities (like nodes, edges, panels, etc) */
@@ -335,7 +336,7 @@ export interface DiagramMakerConfig<NodeType, EdgeType> {
   renderCallbacks: RenderCallbacks<NodeType, EdgeType>;
 
   /**
-   * Shoudl Component Update Callbacks for updating nodes,
+   * Should Component Update Callbacks for updating nodes,
    */
   shouldUpdateCallbacks?: ShouldUpdateCallbacks<NodeType>;
   /**

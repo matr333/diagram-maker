@@ -328,7 +328,7 @@ export interface DiagramMakerEditor {
   readonly selectionMarquee?: DiagramMakerSelectionMarquee;
 }
 
-export interface DiagramMakerData<NodeType, EdgeType> {
+export interface DiagramMakerData<NodeType, EdgeType, PluginsType = DiagramMakerPlugins> {
   /** Current state for all nodes */
   readonly nodes: DiagramMakerNodes<NodeType>;
   /** Current state for all edges */
@@ -336,7 +336,7 @@ export interface DiagramMakerData<NodeType, EdgeType> {
   /** Current state for all panels */
   readonly panels: DiagramMakerPanels;
   /** Current state for all plugins */
-  readonly plugins?: DiagramMakerPlugins;
+  readonly plugins?: PluginsType;
   /** Current state for diagram maker workspace */
   readonly workspace: DiagramMakerWorkspace;
   /** Current state for diagram maker potential node if one needs to be rendered currently */
