@@ -595,7 +595,7 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     const activeEdges = edgeKeys.filter(
       (edgeKey: string) => {
         const srcNode = nodes[edges[edgeKey].src];
-        const destNode = nodes[edges[edgeKey].src];
+        const destNode = nodes[edges[edgeKey].dest];
         return srcNode && destNode && !srcNode?.diagramMakerData?.hidden && !destNode?.diagramMakerData?.hidden;
       },
     );
