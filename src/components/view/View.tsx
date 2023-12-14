@@ -593,7 +593,11 @@ class View<NodeType, EdgeType> extends Preact.Component<ViewProps<NodeType, Edge
     const { edges } = this.props.state;
     const edgeKeys = Object.keys(edges);
     const activeEdges = edgeKeys.filter(
-      (edgeKey: string) => !!(nodes[edges[edgeKey].src] && nodes[edges[edgeKey].dest]),
+      (edgeKey: string) => {
+        const srcNode = nodes[edges[edgeKey].src];
+        const destNode = nodes[edges[edgeKey].src];
+        return srcNode && destNode && !srcNode?.diagramMakerData?.hidden && !destNode?.diagramMakerData?.hidden;
+      },
     );
     const connectorPlacement = this.props.configService.getConnectorPlacement();
     const edgeMapping: { [key: string]: string } = {};

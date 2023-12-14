@@ -41,14 +41,18 @@ export default function workflowLayout<NodeType, EdgeType>(
 
   keys(state.nodes).forEach((nodeId) => {
     const nodeData = state.nodes[nodeId].diagramMakerData;
-    dagreGraph.setNode(nodeId, {
-      height: nodeData.size.height,
-      width: nodeData.size.width,
-    });
+    if (!nodeData?.hidden) {
+      dagreGraph.setNode(nodeId, {
+        height: nodeData.size.height,
+        width: nodeData.size.width,
+      });
+    }
   });
 
   values(state.edges).forEach((edge) => {
-    dagreGraph.setEdge(edge.src, edge.dest);
+    if (!state.nodes[edge.src]?.diagramMakerData?.hidden && !state.nodes[edge.dest]?.diagramMakerData?.hidden) {
+      dagreGraph.setEdge(edge.src, edge.dest);
+    }
   });
 
   Dagre.layout(dagreGraph);
