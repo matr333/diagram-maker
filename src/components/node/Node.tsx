@@ -39,6 +39,10 @@ export default class Node<NodeType> extends Preact.Component<NodeProps<NodeType>
     const transform = `translate3d(${x}px, ${y}px, 0)`;
     const { renderCallback, destroyCallback } = this.props;
 
+    if (diagramMakerData?.hidden) {
+      return <Preact.Fragment />;
+    }
+
     return (
       <div
         className={`dm-node ${diagramMakerData.classNames?.join(' ') || ''}`}
