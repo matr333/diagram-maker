@@ -1,7 +1,7 @@
 {
   "name": "diagram-maker-pro",
   "description": "A library to display an interactive editor for any graph-like data.",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "author": {
     "name": "Amazon Web Services",
     "url": "https://aws.amazon.com/"
