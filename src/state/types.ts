@@ -139,7 +139,9 @@ export interface DiagramMakerNode<NodeType> {
      */
     readonly classNames?: string[];
 
-    /** Denotes whether the node is hidden on the canvas **/
+    /**
+     *  Denotes whether the node is hidden on the canvas
+     */
     readonly hidden?: boolean,
   };
   /** Contains data managed by the consumer */
