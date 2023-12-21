@@ -9,7 +9,8 @@ import UIEventNormalizer, {
   NormalizedMouseMoveEvent,
 } from 'diagramMaker/service/ui/UIEventNormalizer';
 import UITargetNormalizer from 'diagramMaker/service/ui/UITargetNormalizer';
-import { Position } from 'diagramMaker/state/types';
+import { DiagramMakerData, Position } from 'diagramMaker/state/types';
+import { Store } from 'redux';
 
 export enum ContainerEventType {
   DIAGRAM_MAKER_CONTAINER_UPDATE = 'diagramMakerContainerUpdate',
@@ -105,7 +106,7 @@ const { DESTROY } = DestroyEventType;
 
 const { normalizeTarget, getTarget } = UITargetNormalizer;
 
-export default class UIEventManager {
+export default class UIEventManager<NodeType = {}, EdgeType = {}> {
   private static destroyEventListener = ({ eventType, eventListener, context }: EventListenerRef): void => {
     context.removeEventListener(eventType, eventListener);
   };
@@ -126,7 +127,11 @@ export default class UIEventManager {
 
   private eventListenerRefs: EventListenerRef[] = [];
 
-  constructor(private observer: Observer, private context: HTMLElement) {
+  constructor(
+    private observer: Observer,
+    private context: HTMLElement,
+    private store: Store<DiagramMakerData<NodeType, EdgeType>>,
+  ) {
     // Mouse
     this.listenFor(MOUSE_DOWN, UIEventNormalizer.normalizeMouseDownEvent, window);
     this.listenFor(MOUSE_UP, UIEventNormalizer.normalizeMouseUpEvent, window);
@@ -269,7 +274,15 @@ export default class UIEventManager {
   };
 
   private setCurrentDragOffset = (dragOffset?: Position) => {
-    this.currentDragOffset = dragOffset;
+    this.currentDragOffset = dragOffset && {
+      x: dragOffset.x / this.store.getState().workspace.scale,
+      y: dragOffset.y / this.store.getState().workspace.scale,
+    };
+  };
+
+  private getCurrentDragOffset = () => this.currentDragOffset && {
+    x: this.currentDragOffset.x * this.store.getState().workspace.scale,
+    y: this.currentDragOffset.y * this.store.getState().workspace.scale,
   };
 
   private setDragReference = (refPosition?: Position) => {
@@ -313,7 +326,7 @@ export default class UIEventManager {
     }
 
     const { position } = event;
-    const offset = this.currentDragOffset;
+    const offset = this.getCurrentDragOffset();
     const { dragReference } = this;
     const target = normalizeTarget(this.currentDraggable);
     const type = DragEventType.DRAG;
@@ -336,7 +349,7 @@ export default class UIEventManager {
       return;
     }
 
-    const offset = this.currentDragOffset;
+    const offset = this.getCurrentDragOffset();
     const { position } = event;
     const dropzone = normalizeTarget(this.currentDropTarget);
     const target = normalizeTarget(this.currentDraggable);
@@ -361,7 +374,7 @@ export default class UIEventManager {
       return;
     }
 
-    const offset = this.currentDragOffset;
+    const offset = this.getCurrentDragOffset();
     const target = this.currentDraggable;
     const dropzone = normalizeTarget(dropzoneElement);
     const type = DropEventType.DRAG_OVER;

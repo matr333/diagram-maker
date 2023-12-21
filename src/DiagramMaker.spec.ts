@@ -75,7 +75,7 @@ describe('DiagramMaker', () => {
       expect(DiagramMakerApi).toHaveBeenCalledWith(mockStore);
       expect(Observer).toHaveBeenCalledTimes(1);
       expect(mockObserver.subscribeAll).toHaveBeenCalledWith(eventListener);
-      expect(UIEventManager).toHaveBeenCalledWith(mockObserver, context);
+      expect(UIEventManager).toHaveBeenCalledWith(mockObserver, context, mockStore);
       expect(ActionDispatcher).toHaveBeenCalledWith(mockObserver, mockStore, mockConfigService);
       expect(render).toHaveBeenCalledWith(mockStore, context, mockConfigService);
       expect(mockObserver.publish).toHaveBeenCalledWith(ContainerEventType.DIAGRAM_MAKER_CONTAINER_UPDATE, mockEvent);
@@ -100,7 +100,7 @@ describe('DiagramMaker', () => {
       expect(ConfigService).toHaveBeenCalledWith(config);
       expect(createStore).toHaveBeenCalledWith(undefined, undefined, undefined, actionInterceptor);
       expect(Observer).toHaveBeenCalledTimes(1);
-      expect(UIEventManager).toHaveBeenCalledWith(mockObserver, testContext);
+      expect(UIEventManager).toHaveBeenCalledWith(mockObserver, testContext, mockStore);
       expect(ActionDispatcher).toHaveBeenCalledWith(mockObserver, mockStore, mockConfigService);
       expect(render).toHaveBeenCalledWith(mockStore, testContext, mockConfigService);
     });

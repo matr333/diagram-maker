@@ -13,6 +13,7 @@ import {
   unmockGetElementsFromPoint,
 } from 'diagramMaker/service/ui/UITargetNormalizer.spec';
 
+import { Store } from 'redux';
 import UIEventManager, {
   ContainerEventType,
   DestroyEventType,
@@ -39,10 +40,18 @@ context.setAttribute(EventAttribute.DATA_EVENT_TARGET, 'true');
 const contextOffset = fromScreenToPage(context.getBoundingClientRect());
 let observer: Observer;
 let manager: UIEventManager;
+let mockStore;
 
 beforeEach(() => {
+  mockStore = {
+    getState: jest.fn().mockReturnValue({
+      workspace: {
+        scale: 1,
+      },
+    }),
+  } as any as Store;
   observer = new Observer();
-  manager = new UIEventManager(observer, context);
+  manager = new UIEventManager(observer, context, mockStore);
   context.getBoundingClientRect = jest.fn(() => ({ top: 0, left: 0 })) as any;
 });
 

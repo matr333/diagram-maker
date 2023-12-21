@@ -68,7 +68,7 @@ export default class DiagramMaker<NodeType = {}, EdgeType = {}> {
     if (eventListener) {
       this.observer.subscribeAll(eventListener);
     }
-    this.eventManager = new UIEventManager(this.observer, this.container);
+    this.eventManager = new UIEventManager(this.observer, this.container, this.store);
     this.actionDispatcher = new ActionDispatcher(this.observer, this.store, this.config);
 
     render<NodeType, EdgeType>(this.store, this.container, this.config);
