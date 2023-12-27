@@ -761,7 +761,7 @@ describe('ActionDispatcher', () => {
       const delta = offset.y;
       const ctrlKey = false;
 
-      const normalizedPosition = { x: position.x - 0.5*offset.x, y: position.y - 0.5*offset.y };
+      const normalizedPosition = { x: position.x - 0.5 * offset.x, y: position.y - 0.5 * offset.y };
 
       const originalEvent = {
         preventDefault: jest.fn(),
@@ -769,7 +769,9 @@ describe('ActionDispatcher', () => {
         deltaY: offset.y,
       };
 
-      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position, ctrlKey });
+      observer.publish(MOUSE_WHEEL, {
+        delta, originalEvent, position, ctrlKey,
+      });
 
       expect(originalEvent.preventDefault).toHaveBeenCalledTimes(1);
       expect(handleWorkspaceDragSpy).toHaveBeenCalledTimes(1);
@@ -792,7 +794,9 @@ describe('ActionDispatcher', () => {
         preventDefault: jest.fn(),
       };
 
-      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position, ctrlKey });
+      observer.publish(MOUSE_WHEEL, {
+        delta, originalEvent, position, ctrlKey,
+      });
 
       expect(handleWorkspaceZoomSpy).toHaveBeenCalledTimes(1);
       expect(originalEvent.preventDefault).toHaveBeenCalledTimes(1);
@@ -818,7 +822,9 @@ describe('ActionDispatcher', () => {
 
       asMock(UITargetNormalizer.getTarget).mockReturnValueOnce(false);
 
-      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position, ctrlKey });
+      observer.publish(MOUSE_WHEEL, {
+        delta, originalEvent, position, ctrlKey,
+      });
 
       expect(handleWorkspaceZoomSpy).toHaveBeenCalledTimes(0);
       expect(originalEvent.preventDefault).toHaveBeenCalledTimes(0);
@@ -846,7 +852,9 @@ describe('ActionDispatcher', () => {
         preventDefault: jest.fn(),
       };
 
-      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position, ctrlKey });
+      observer.publish(MOUSE_WHEEL, {
+        delta, originalEvent, position, ctrlKey,
+      });
 
       expect(handleWorkspaceZoomSpy).toHaveBeenCalledTimes(0);
       expect(originalEvent.preventDefault).toHaveBeenCalledTimes(1);

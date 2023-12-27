@@ -340,7 +340,9 @@ export default class ActionDispatcher<NodeType, EdgeType> {
   };
 
   private handleWheelScroll = (event: NormalizedMouseScrollEvent): void => {
-    const { delta, originalEvent, position, ctrlKey } = event;
+    const {
+      delta, originalEvent, position, ctrlKey,
+    } = event;
 
     const workspaceState = this.store.getState().workspace;
     const editorState = this.store.getState().editor;
@@ -350,11 +352,12 @@ export default class ActionDispatcher<NodeType, EdgeType> {
 
       if (!editorState.contextMenu) {
         if (!ctrlKey) {
-          handleWorkspaceDrag(this.store,
+          handleWorkspaceDrag(
+            this.store,
             ActionDispatcher.getNormalizedPositionOffset(
               workspaceState.position,
-              {x: 0.5*originalEvent?.deltaX, y: 0.5*originalEvent?.deltaY},
-            )
+              { x: 0.5 * originalEvent.deltaX, y: 0.5 * originalEvent.deltaY },
+            ),
           );
         } else {
           handleWorkspaceZoom(this.store, -delta, position);
