@@ -752,11 +752,37 @@ describe('ActionDispatcher', () => {
   });
 
   describe('handleWheelScroll', () => {
+    it('calls handleWorkspaceDragSpy', () => {
+      const position: Position = { x: 200, y: 300 };
+      initialize(position, 2, EditorMode.DRAG);
+      const offset: Position = { x: 50, y: 50 };
+      const handleWorkspaceDragSpy = jest.spyOn(WorkspaceActionHandlers, 'handleWorkspaceDrag');
+
+      const delta = offset.y;
+      const ctrlKey = false;
+
+      const normalizedPosition = { x: position.x - 0.5*offset.x, y: position.y - 0.5*offset.y };
+
+      const originalEvent = {
+        preventDefault: jest.fn(),
+        deltaX: offset.x,
+        deltaY: offset.y,
+      };
+
+      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position, ctrlKey });
+
+      expect(originalEvent.preventDefault).toHaveBeenCalledTimes(1);
+      expect(handleWorkspaceDragSpy).toHaveBeenCalledTimes(1);
+      expect(handleWorkspaceDragSpy).toHaveBeenCalledWith(store, normalizedPosition);
+      expect(UITargetNormalizer.getTarget)
+        .toHaveBeenCalledWith(originalEvent, 'data-type', DiagramMakerComponentsType.WORKSPACE);
+    });
     it('calls handleWorkspaceZoom', () => {
       initialize({ x: 200, y: 300 }, 2);
 
       const handleWorkspaceZoomSpy = jest.spyOn(WorkspaceActionHandlers, 'handleWorkspaceZoom');
       const delta = 10;
+      const ctrlKey = true;
       const position = {
         x: 10,
         y: 10,
@@ -766,7 +792,7 @@ describe('ActionDispatcher', () => {
         preventDefault: jest.fn(),
       };
 
-      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position });
+      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position, ctrlKey });
 
       expect(handleWorkspaceZoomSpy).toHaveBeenCalledTimes(1);
       expect(originalEvent.preventDefault).toHaveBeenCalledTimes(1);
@@ -780,6 +806,7 @@ describe('ActionDispatcher', () => {
 
       const handleWorkspaceZoomSpy = jest.spyOn(WorkspaceActionHandlers, 'handleWorkspaceZoom');
       const delta = 10;
+      const ctrlKey = true;
       const position = {
         x: 10,
         y: 10,
@@ -791,7 +818,7 @@ describe('ActionDispatcher', () => {
 
       asMock(UITargetNormalizer.getTarget).mockReturnValueOnce(false);
 
-      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position });
+      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position, ctrlKey });
 
       expect(handleWorkspaceZoomSpy).toHaveBeenCalledTimes(0);
       expect(originalEvent.preventDefault).toHaveBeenCalledTimes(0);
@@ -809,6 +836,7 @@ describe('ActionDispatcher', () => {
 
       const handleWorkspaceZoomSpy = jest.spyOn(WorkspaceActionHandlers, 'handleWorkspaceZoom');
       const delta = 10;
+      const ctrlKey = true;
       const position = {
         x: 10,
         y: 10,
@@ -818,7 +846,7 @@ describe('ActionDispatcher', () => {
         preventDefault: jest.fn(),
       };
 
-      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position });
+      observer.publish(MOUSE_WHEEL, { delta, originalEvent, position, ctrlKey });
 
       expect(handleWorkspaceZoomSpy).toHaveBeenCalledTimes(0);
       expect(originalEvent.preventDefault).toHaveBeenCalledTimes(1);

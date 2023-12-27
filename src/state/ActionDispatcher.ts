@@ -340,15 +340,25 @@ export default class ActionDispatcher<NodeType, EdgeType> {
   };
 
   private handleWheelScroll = (event: NormalizedMouseScrollEvent): void => {
-    const { delta, originalEvent, position } = event;
+    const { delta, originalEvent, position, ctrlKey } = event;
 
+    const workspaceState = this.store.getState().workspace;
     const editorState = this.store.getState().editor;
 
     if (UITargetNormalizer.getTarget(originalEvent, DATA_ATTR_TYPE, DiagramMakerComponentsType.WORKSPACE)) {
       originalEvent.preventDefault();
 
       if (!editorState.contextMenu) {
-        handleWorkspaceZoom(this.store, -delta, position);
+        if (!ctrlKey) {
+          handleWorkspaceDrag(this.store,
+            ActionDispatcher.getNormalizedPositionOffset(
+              workspaceState.position,
+              {x: 0.5*originalEvent?.deltaX, y: 0.5*originalEvent?.deltaY},
+            )
+          );
+        } else {
+          handleWorkspaceZoom(this.store, -delta, position);
+        }
       }
     }
   };
