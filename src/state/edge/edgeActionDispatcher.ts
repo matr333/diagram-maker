@@ -133,7 +133,7 @@ export function handleEdgeCreate<NodeType, EdgeType>(
       && state.edges[edgeId].connectorSrcType === connectorSrcType
       && state.edges[edgeId].connectorDestType === connectorDestType);
     if (!!state.nodes[src] && !!state.nodes[dest] && duplicate.length === 0) {
-      const id = `dm-edge-${uuid()}`;
+      const id = `${uuid()}`;
       store.dispatch(createNewEdgeAction(id, src, dest, connectorSrcType, connectorDestType));
     }
   }

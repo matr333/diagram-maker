@@ -251,7 +251,7 @@ export function handleNodeCreate<NodeType, EdgeType>(
   typeId: string | undefined,
 ) {
   if (typeId) {
-    const id = `dm-node-${uuid()}`;
+    const id = `${uuid()}`;
     const state = store.getState();
     const { potentialNode } = state;
     if (potentialNode) {

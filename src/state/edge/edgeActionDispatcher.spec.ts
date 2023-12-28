@@ -181,7 +181,7 @@ describe('edgeActionDispatcher', () => {
       const src = 'node-1';
       const dest = 'node-2';
       const mockId = '1';
-      const id = `dm-edge-${mockId}`;
+      const id = `${mockId}`;
       mockState({ nodes: { 'node-1': {}, 'node-2': {} }, edges: {} });
       asMock(uuid).mockReturnValueOnce(mockId);
       handleEdgeCreate(store, src, dest);
