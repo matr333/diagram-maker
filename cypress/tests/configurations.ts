@@ -268,7 +268,7 @@ describe('DiagramMaker.Configurations', () => {
         const expectedTransform = convertScaleToMatrix(1);
         getWorkspace()
           .trigger('wheel', {
-            deltaY: -50, pageX: 0, pageY: 0, force: true,
+            deltaY: -50, pageX: 0, pageY: 0, force: true, ctrlKey: false,
           });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
@@ -312,7 +312,7 @@ describe('DiagramMaker.Configurations', () => {
         const expectedTransform = convertScaleToMatrix(1);
         getWorkspace()
           .trigger('wheel', {
-            deltaY: -50, pageX: 0, pageY: 0, force: true,
+            deltaY: -50, pageX: 0, pageY: 0, force: true, ctrlKey: false,
           });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
@@ -356,7 +356,7 @@ describe('DiagramMaker.Configurations', () => {
         const expectedTransform = convertScaleToMatrix(1);
         getWorkspace()
           .trigger('wheel', {
-            deltaY: -50, pageX: 0, pageY: 0, force: true,
+            deltaY: -50, pageX: 0, pageY: 0, force: true, ctrlKey: false,
           });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
@@ -400,7 +400,7 @@ describe('DiagramMaker.Configurations', () => {
         const expectedTransform = convertScaleToMatrix(1);
         getWorkspace()
           .trigger('wheel', {
-            deltaY: -50, pageX: 0, pageY: 0, force: true,
+            deltaY: -50, pageX: 0, pageY: 0, force: true, ctrlKey: false,
           });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
