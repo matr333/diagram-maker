@@ -53,7 +53,7 @@ describe('nodeActionDispatcher', () => {
       const size = { width: 200, height: 200 };
       const potentialNode = { position, size };
       const mockId = '1';
-      const id = `dm-node-${mockId}`;
+      const id = `${mockId}`;
       asMock(uuid).mockReturnValueOnce(mockId);
       asMock(store.getState).mockReturnValueOnce({ potentialNode });
       handleNodeCreate(store, typeId);
