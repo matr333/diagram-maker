@@ -102,7 +102,7 @@ describe('DiagramMaker.API', () => {
         const expectedTransform = convertScaleToMatrix(1.05);
         getWorkspace()
           .trigger('wheel', {
-            deltaY: -50, pageX: 0, pageY: 0, force: true,
+            deltaY: -50, pageX: 0, pageY: 0, force: true, ctrlKey: true
           });
         getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
       });
