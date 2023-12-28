@@ -56,7 +56,7 @@ describe('DiagramMaker.Workspace', () => {
       const expectedTransform = convertScaleToMatrix(1.05);
       getWorkspace()
         .trigger('wheel', {
-          deltaY: -50, pageX: 0, pageY: 0, force: true, ctrlKey: false,
+          deltaY: -50, pageX: 0, pageY: 0, force: true, ctrlKey: true,
         });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
@@ -65,7 +65,7 @@ describe('DiagramMaker.Workspace', () => {
       const expectedTransform = convertScaleToMatrix(0.95);
       getWorkspace()
         .trigger('wheel', {
-          deltaY: 50, pageX: 0, pageY: 0, force: true, ctrlKey: false,
+          deltaY: 50, pageX: 0, pageY: 0, force: true, ctrlKey: true,
         });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
@@ -75,7 +75,7 @@ describe('DiagramMaker.Workspace', () => {
       const expectedTransform = convertScaleToMatrix(maxScale);
       getWorkspace()
         .trigger('wheel', {
-          deltaY: -5000, pageX: 0, pageY: 0, force: true, ctrlKey: false,
+          deltaY: -5000, pageX: 0, pageY: 0, force: true, ctrlKey: true,
         });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
@@ -87,7 +87,7 @@ describe('DiagramMaker.Workspace', () => {
       const expectedTransform = convertScaleToMatrix(excpectedScale);
       getWorkspace()
         .trigger('wheel', {
-          deltaY: 5000, pageX: 0, pageY: 0, force: true, ctrlKey: false,
+          deltaY: 5000, pageX: 0, pageY: 0, force: true, ctrlKey: true,
         });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
@@ -100,7 +100,7 @@ describe('DiagramMaker.Workspace', () => {
       const expectedTransform = convertScaleToMatrix(minScale);
       getWorkspace()
         .trigger('wheel', {
-          deltaY: 5000, pageX: 0, pageY: 0, force: true, ctrlKey: false,
+          deltaY: 5000, pageX: 0, pageY: 0, force: true, ctrlKey: true,
         });
       getWorkspace().should('have.css', 'transform').and('eq', expectedTransform);
     });
