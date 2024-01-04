@@ -352,9 +352,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       originalEvent.preventDefault();
 
       if (!editorState.contextMenu) {
-        console.log(IS_MAC, ctrlKey);
         if (!ctrlKey && IS_MAC) {
-          console.log('test');
           handleWorkspaceDrag(
             this.store,
             ActionDispatcher.getNormalizedPositionOffset(

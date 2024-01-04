@@ -42,7 +42,7 @@ jest.mock('diagramMaker/service/ui/UIEventNormalizer', () => {
   const original = jest.requireActual('diagramMaker/service/ui/UIEventNormalizer');
   return {
     ...original,
-    IS_MAC: jest.fn().mockReturnValue(false)
+    IS_MAC: jest.fn().mockReturnValue(false),
   };
 });
 
@@ -760,7 +760,7 @@ describe('ActionDispatcher', () => {
 
   describe('handleWheelScroll', () => {
     it('calls handleWorkspaceDragSpy', () => {
-      jest.unmock("diagramMaker/service/ui/UIEventNormalizer");
+      jest.unmock('diagramMaker/service/ui/UIEventNormalizer');
       jest.mock('diagramMaker/service/ui/UIEventNormalizer', () => {
         const original = jest.requireActual('diagramMaker/service/ui/UIEventNormalizer');
         return {
