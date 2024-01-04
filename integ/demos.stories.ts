@@ -198,42 +198,42 @@ const Template = ({
       undefined,
       addDevTools(),
       (action: Action, next: Dispatch<Action>, getState: () => DiagramMakerData<{}, {}>) => {
-    onAction(action);
-    if (actionInterceptor) {
-      const diagramMakerAction = action as DiagramMakerAction<{ odd: boolean }, {}>;
-      updateActionInLogger(action);
-      if (diagramMakerAction.type === DiagramMakerActions.DELETE_ITEMS
+        onAction(action);
+        if (actionInterceptor) {
+          const diagramMakerAction = action as DiagramMakerAction<{ odd: boolean }, {}>;
+          updateActionInLogger(action);
+          if (diagramMakerAction.type === DiagramMakerActions.DELETE_ITEMS
         && diagramMakerAction.payload.nodeIds.length > 0) {
-        return;
-      }
+            return;
+          }
 
-      if (diagramMakerAction.type === DiagramMakerActions.NODE_CREATE) {
-        // nodes before are even so this odd
-        diagramMakerAction.payload.consumerData = {
-          odd: Object.keys(getState().nodes).length % 2 === 0,
-        };
-        next(diagramMakerAction);
-        return;
-      }
+          if (diagramMakerAction.type === DiagramMakerActions.NODE_CREATE) {
+            // nodes before are even so this odd
+            diagramMakerAction.payload.consumerData = {
+              odd: Object.keys(getState().nodes).length % 2 === 0,
+            };
+            next(diagramMakerAction);
+            return;
+          }
 
-      if (diagramMakerAction.type === DiagramMakerActions.EDGE_CREATE) {
-        next(diagramMakerAction);
-        const newAction: CreateEdgeAction<{}> = {
-          type: DiagramMakerActions.EDGE_CREATE,
-          payload: {
-            id: `${diagramMakerAction.payload.id}-2`,
-            src: diagramMakerAction.payload.dest,
-            dest: diagramMakerAction.payload.src,
-          },
-        };
-        setTimeout(() => next(newAction), 1000);
-      }
-      next(action);
-    } else {
-      updateActionInLogger(action);
-      next(action);
-    }
-  },
+          if (diagramMakerAction.type === DiagramMakerActions.EDGE_CREATE) {
+            next(diagramMakerAction);
+            const newAction: CreateEdgeAction<{}> = {
+              type: DiagramMakerActions.EDGE_CREATE,
+              payload: {
+                id: `${diagramMakerAction.payload.id}-2`,
+                src: diagramMakerAction.payload.dest,
+                dest: diagramMakerAction.payload.src,
+              },
+            };
+            setTimeout(() => next(newAction), 1000);
+          }
+          next(action);
+        } else {
+          updateActionInLogger(action);
+          next(action);
+        }
+      },
     ),
     plugin ? (event) => {
       handleTestPluginEvent(event, windowAsAny.diagramMaker);
