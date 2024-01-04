@@ -1,5 +1,4 @@
 import { DiagramMakerComponentsType } from 'diagramMaker/service/ui/types';
-import { ActionInterceptor } from 'diagramMaker/state/middleware';
 import {
   DiagramMakerConnector,
   DiagramMakerData,
@@ -420,7 +419,6 @@ export default class ConfigService<NodeType, EdgeType> {
   ) || ConnectorPlacement.CENTERED;
 
   public getShowArrowhead = (): boolean => (this.config.options && this.config.options.showArrowhead) || false;
-
 
   public getSizeForNodeType = (typeId: string): Size | undefined => {
     const typeConfig = this.getNodeTypeConfiguration(typeId);

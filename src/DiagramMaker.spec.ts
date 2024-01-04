@@ -1,7 +1,7 @@
 import { destroy, render } from 'diagramMaker/components/renderUtils';
 import ConfigService from 'diagramMaker/service/ConfigService';
 import DiagramMakerApi from 'diagramMaker/service/DiagramMakerApi';
-import Observer, { ObserverCallback } from 'diagramMaker/service/observer/Observer';
+import Observer from 'diagramMaker/service/observer/Observer';
 import UIEventManager, {
   ContainerEventType,
   DestroyEventType,
