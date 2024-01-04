@@ -38,6 +38,13 @@ import { rootEventFilter } from './mode';
 
 jest.mock('diagramMaker/state/mode/rootEventFilter', () => ({ default: jest.fn(() => true) }));
 jest.mock('diagramMaker/service/ui/UITargetNormalizer', () => ({ default: { getTarget: jest.fn(() => true) } }));
+jest.mock('diagramMaker/service/ui/UIEventNormalizer', () => {
+  const original = jest.requireActual('diagramMaker/service/ui/UIEventNormalizer');
+  return {
+    ...original,
+    IS_MAC: jest.fn().mockReturnValue(false)
+  };
+});
 
 interface MockStore {
   getState: () => {
@@ -753,6 +760,14 @@ describe('ActionDispatcher', () => {
 
   describe('handleWheelScroll', () => {
     it('calls handleWorkspaceDragSpy', () => {
+      jest.unmock("diagramMaker/service/ui/UIEventNormalizer");
+      jest.mock('diagramMaker/service/ui/UIEventNormalizer', () => {
+        const original = jest.requireActual('diagramMaker/service/ui/UIEventNormalizer');
+        return {
+          ...original,
+          IS_MAC: jest.fn().mockReturnValue(true),
+        };
+      });
       const position: Position = { x: 200, y: 300 };
       initialize(position, 2, EditorMode.DRAG);
       const offset: Position = { x: 50, y: 50 };

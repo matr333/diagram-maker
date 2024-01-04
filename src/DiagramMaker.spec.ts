@@ -61,7 +61,12 @@ describe('DiagramMaker', () => {
       new DiagramMaker(
         context,
         config,
-        createStore(),
+        createStore(
+          initialData,
+          consumerRootReducer,
+          consumerEnhancer,
+          actionInterceptor,
+        ),
         eventListener,
       );
 
@@ -91,7 +96,7 @@ describe('DiagramMaker', () => {
       testContext.id = testId;
       context.appendChild(testContext);
 
-      new DiagramMaker(testId, config, createStore());
+      new DiagramMaker(testId, config, createStore(undefined, undefined, undefined, actionInterceptor));
 
       expect(ConfigService).toHaveBeenCalledWith(config);
       expect(createStore).toHaveBeenCalledWith(undefined, undefined, undefined, actionInterceptor);
