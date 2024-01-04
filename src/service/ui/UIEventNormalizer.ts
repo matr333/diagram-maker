@@ -17,7 +17,7 @@ import {
 
 // to determine platform for ctrl(win)/cmd(mac) modifier key handling
 // https://github.com/ianstormtaylor/is-hotkey/blob/master/src/index.js
-const IS_MAC = (
+export const IS_MAC = (
   typeof window !== 'undefined'
   && /Mac|iPod|iPhone|iPad/.test(window.navigator.platform)
 );

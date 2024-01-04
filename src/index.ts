@@ -26,3 +26,4 @@ export { EditorMode, PositionAnchor } from './state/types';
 export { sequenceReducers } from './state/common/sequenceReducers';
 export { default as ActionDispatcher } from './state/ActionDispatcher';
 export { NodeProps, PotentialNodeProps } from './components';
+export { default as createStore } from './state/createStore';

@@ -13,7 +13,6 @@ describe('ConfigService', () => {
   const renderWorkspaceContextMenu = jest.fn();
   const renderTestPanel = jest.fn();
   const renderPotentialNode = jest.fn();
-  const actionInterceptor = jest.fn();
   const size = { width: 100, height: 100 };
   const options = {
     connectorPlacement: ConnectorPlacement.LEFT_RIGHT,
@@ -38,7 +37,6 @@ describe('ConfigService', () => {
   const config: DiagramMakerConfig<void, void> = {
     options,
     renderCallbacks,
-    actionInterceptor,
   };
   const configService = new ConfigService(config);
 
@@ -149,19 +147,6 @@ describe('ConfigService', () => {
       const boundCallback = configServiceWithoutContextMenu
         .getBoundRenderContextMenu(DiagramMakerComponentsType.WORKSPACE) as any;
       expect(boundCallback).toBeUndefined();
-    });
-  });
-
-  describe('getActionInterceptor', () => {
-    it('returns actionInterceptor if it is specified in config', () => {
-      expect(configService.getActionInterceptor()).toBe(actionInterceptor);
-    });
-
-    it('returns undefined if no actionInterceptor is defined in config', () => {
-      const configWithoutActionInterceptor: any = { renderCallbacks: {} };
-      const configServiceWithoutActionInterceptor = new ConfigService(configWithoutActionInterceptor);
-
-      expect(configServiceWithoutActionInterceptor.getActionInterceptor()).toBe(undefined);
     });
   });
 

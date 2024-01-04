@@ -340,19 +340,6 @@ export interface DiagramMakerConfig<NodeType, EdgeType> {
    */
   shouldUpdateCallbacks?: ShouldUpdateCallbacks<NodeType>;
   /**
-   * Action interceptor. Before any action is dispatched to the store,
-   * you may intercept and modify it or cancel it entirely.
-   * Please keep in mind that in case you implement an interceptor,
-   * you're responsible for dispatching the action.
-   *
-   * @example <caption>Logging an action</caption>
-   * const log = (action, dispatch, getState) => {
-   *   console.log(action);
-   *   dispatch(action);
-   * };
-   */
-  actionInterceptor?: ActionInterceptor<NodeType, EdgeType>;
-  /**
    * Node Type Configuration. Optional.
    * Useful for specifying overrides for connector placement or visible connectors.
    * Also, useful for providing for size for potential nodes being dragged using the same type.
@@ -434,7 +421,6 @@ export default class ConfigService<NodeType, EdgeType> {
 
   public getShowArrowhead = (): boolean => (this.config.options && this.config.options.showArrowhead) || false;
 
-  public getActionInterceptor = (): ActionInterceptor<NodeType, EdgeType> | undefined => this.config.actionInterceptor;
 
   public getSizeForNodeType = (typeId: string): Size | undefined => {
     const typeConfig = this.getNodeTypeConfiguration(typeId);

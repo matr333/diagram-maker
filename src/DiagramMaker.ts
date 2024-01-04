@@ -3,7 +3,7 @@
 import 'diagramMaker/polyfills/object-values';
 
 import {
-  Action, Reducer, Store, StoreEnhancer,
+  Store,
 } from 'redux';
 
 import { destroy, render } from 'diagramMaker/components/renderUtils';
@@ -16,7 +16,6 @@ import UIEventManager, {
 } from 'diagramMaker/service/ui/UIEventManager';
 import UIEventNormalizer from 'diagramMaker/service/ui/UIEventNormalizer';
 import ActionDispatcher from 'diagramMaker/state/ActionDispatcher';
-import createStore from 'diagramMaker/state/createStore';
 import { DiagramMakerData } from 'diagramMaker/state/types';
 
 /**
@@ -50,17 +49,11 @@ export default class DiagramMaker<NodeType = {}, EdgeType = {}> {
   constructor(
     domHandle: string | HTMLElement,
     config: DiagramMakerConfig<NodeType, EdgeType>,
-    {
-      initialData, consumerRootReducer, consumerEnhancer, eventListener,
-    }: {
-      initialData?: DiagramMakerData<NodeType, EdgeType>,
-      consumerRootReducer?: Reducer<DiagramMakerData<NodeType, EdgeType>, Action>,
-      consumerEnhancer?: StoreEnhancer,
-      eventListener?: ObserverCallback;
-    } = {},
+    store: Store<DiagramMakerData<NodeType, EdgeType>>,
+    eventListener?: ObserverCallback,
   ) {
     this.config = new ConfigService(config);
-    this.store = createStore(initialData, consumerRootReducer, consumerEnhancer, this.config.getActionInterceptor());
+    this.store = store;
     this.api = new DiagramMakerApi(this.store);
 
     this.container = DiagramMaker.getContainer(domHandle);

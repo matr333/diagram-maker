@@ -15,6 +15,7 @@ import {
   WheelEventType,
 } from 'diagramMaker/service/ui/UIEventManager';
 import {
+  IS_MAC,
   KeyboardCode,
   NormalizedContainerEvent,
   NormalizedDragEvent,
@@ -351,7 +352,7 @@ export default class ActionDispatcher<NodeType, EdgeType> {
       originalEvent.preventDefault();
 
       if (!editorState.contextMenu) {
-        if (!ctrlKey) {
+        if (!ctrlKey && IS_MAC) {
           handleWorkspaceDrag(
             this.store,
             ActionDispatcher.getNormalizedPositionOffset(
